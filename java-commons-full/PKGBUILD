@@ -103,7 +103,7 @@ md5sums=(
   36d5a1daa9d477d00cd3ad80226325c5 # commons-daemon-native
   bd272e9611b0d880fd02493377d4691b # commons-dbcp
   6d541bf457f6e2c837fd3350f98db984 # commons-dbutils
-  b67dba335877e5470b1220fadd3501ad # commons-digester
+  b67dba335877e5470b1220fadd3501ad # commons-digester3
   fb856b9689bdc4c52f8ae999057f89fc # commons-el
   e72ce14f3e39248251b9501f429ce872 # commons-exec
   fa280caadb0a31b1658167a26f73b2d6 # commons-fileupload
@@ -114,7 +114,7 @@ md5sums=(
   3e8de5516bec9f30f6e43842acade11f # commons-jxpath
   c105c55dc6f92c8ed20d1034be9b182a # commons-lang3
   e5de09672af9b386c30a311654d8541a # commons-logging
-  83659be6765ffdd95a8442054d77f94a # commons-math
+  83659be6765ffdd95a8442054d77f94a # commons-math3
   f2b611f25bfbb2ed9a1a145653d9d023 # commons-modeler
   981137bb8155b5b44e6ce5f66c896bb0 # commons-net
   70a1573d13d76fa3bafe4ee163904e24 # commons-pool
@@ -130,7 +130,7 @@ md5sums=(
 build () {
 
   # Build commons-daemon natives.
-  cd ${srcdir}/commons-daemon-1.0.10-native-src/unix
+  cd ${srcdir}/commons-daemon-${_versions["daemon-native"]}-native-src/unix
   ./configure --prefix=/usr
   make
 }

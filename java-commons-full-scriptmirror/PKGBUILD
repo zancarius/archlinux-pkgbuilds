@@ -137,25 +137,20 @@ md5sums=(
   36d5a1daa9d477d00cd3ad80226325c5 # commons-daemon-native
   bd272e9611b0d880fd02493377d4691b # commons-dbcp
   6d541bf457f6e2c837fd3350f98db984 # commons-dbutils
-  b67dba335877e5470b1220fadd3501ad # commons-digester
-                                   # commons-discovery
+  b67dba335877e5470b1220fadd3501ad # commons-digester3
   fb856b9689bdc4c52f8ae999057f89fc # commons-el
-                                   # commons-email
   e72ce14f3e39248251b9501f429ce872 # commons-exec
   fa280caadb0a31b1658167a26f73b2d6 # commons-fileupload
   eabd2ac280c156bb1be38a9551df1ffb # commons-io
   256550e0c926a5f1c2602e51ff39bd97 # commons-jci
   525bcd92b7df824c45f29e5b703c940a # commons-jcs
-  #e9e3ba84a214d2bcf96aa31b24f3bb5f # commons-jelly
   191c39588d6d14f4cdf6ce30ab9e9629 # commons-jexl
   3e8de5516bec9f30f6e43842acade11f # commons-jxpath
   c105c55dc6f92c8ed20d1034be9b182a # commons-lang3
-  #7ed65e08e8c952c4d9f6db0d73ef5426 # commons-launcher
   e5de09672af9b386c30a311654d8541a # commons-logging
-  83659be6765ffdd95a8442054d77f94a # commons-math
+  83659be6765ffdd95a8442054d77f94a # commons-math3
   f2b611f25bfbb2ed9a1a145653d9d023 # commons-modeler
   981137bb8155b5b44e6ce5f66c896bb0 # commons-net
-                                   # OGNL has no public binary builds as of this writing.
   70a1573d13d76fa3bafe4ee163904e24 # commons-pool
   2ce92656204f2fa63dad6dfa88e1458b # commons-primitives
   0a0ff60ce58634de21082318de0ce8f6 # commons-proxy
