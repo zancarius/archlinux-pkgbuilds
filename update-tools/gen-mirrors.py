@@ -1,21 +1,23 @@
 #!/usr/bin/env python2
 
-# This script examines the PKGBUILD for java-commons-full and attaches a random
-# mirror to each download. The intent is to limit the amount of load on any one
-# mirror. If you need to test this package and randomly select mirrors from
-# within the PKGBUILD (not recommended), use java-commons-full-scriptmirror.
-#
-# gen-mirrors.py should only be run when adding packages, adding mirrors, or
-# making other alterations in which it would make sense to update the mirrors a
-# particular set of packages is downloaded from.
-#
-# Whenever you add a new file to the PKGBUILD sources, use a path relative to
-# the mirrors "commons" directory (e.g. io/binaries/commons-io-2.3-bin.tar.gz)
-# or supply the fully-qualified domain name and path.
-#
-# Author: Benjamin A. Shelton <zancarius@gmail.com>
-# Revision: 20120512
-# License: Public domain. Do whatever you want with this file.
+'''
+This script examines the PKGBUILD for java-commons-full and attaches a random
+mirror to each download. The intent is to limit the amount of load on any one
+mirror. If you need to test this package and randomly select mirrors from
+within the PKGBUILD (not recommended), use java-commons-full-scriptmirror.
+
+gen-mirrors.py should only be run when adding packages, adding mirrors, or
+making other alterations in which it would make sense to update the mirrors a
+particular set of packages is downloaded from.
+
+Whenever you add a new file to the PKGBUILD sources, use a path relative to
+the mirrors "commons" directory (e.g. io/binaries/commons-io-2.3-bin.tar.gz)
+or supply the fully-qualified domain name and path.
+
+Author: Benjamin A. Shelton <zancarius@gmail.com>
+Revision: 20120512
+License: Public domain. Do whatever you want with this file.
+'''
 
 import os
 import random
