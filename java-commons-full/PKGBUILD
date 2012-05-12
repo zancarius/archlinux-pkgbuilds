@@ -1,0 +1,281 @@
+# Maintainer: Benjamin A. Shelton <zancarius@gmail.com>
+
+pkgname=java-commons-full
+pkgver=20120511
+pkgrel=1
+pkgdesc="Full collection of (almost) all Apache Commons libraries."
+arch=(any)
+license=(APACHE)
+depends=(java-runtime)
+
+source=(
+  http://newverhost.com/pub/commons/attributes/binaries/commons-attributes-2.2.tar.gz
+  http://newverhost.com/pub/commons/bcel/binaries/bcel-5.2.tar.gz
+  http://newverhost.com/pub/commons/beanutils/binaries/commons-beanutils-1.8.3-bin.tar.gz
+  http://newverhost.com/pub/commons/betwixt/binaries/commons-betwixt-0.8.tar.gz
+  http://newverhost.com/pub/commons/bsf/binaries/bsf-bin-2.4.0.tar.gz
+  http://newverhost.com/pub/commons/chain/binaries/commons-chain-1.2-bin.tar.gz
+  http://newverhost.com/pub/commons/cli/binaries/commons-cli-1.2-bin.tar.gz
+  http://newverhost.com/pub/commons/codec/binaries/commons-codec-1.6-bin.tar.gz
+  http://newverhost.com/pub/commons/collections/binaries/commons-collections-3.2.1-bin.tar.gz
+  http://newverhost.com/pub/commons/compress/binaries/commons-compress-1.4-bin.tar.gz
+  http://newverhost.com/pub/commons/configuration/binaries/commons-configuration-1.8-bin.tar.gz
+  http://newverhost.com/pub/commons/daemon/binaries/commons-daemon-1.0.10-bin.tar.gz
+  http://newverhost.com/pub/commons/daemon/source/commons-daemon-1.0.10-native-src.tar.gz
+  http://newverhost.com/pub/commons/dbcp/binaries/commons-dbcp-1.4-bin.tar.gz
+  http://newverhost.com/pub/commons/dbutils/binaries/commons-dbutils-1.4-bin.tar.gz
+  http://newverhost.com/pub/commons/digester/binaries/commons-digester3-3.2-bin.tar.gz
+  http://newverhost.com/pub/commons/el/binaries/commons-el-1.0.tar.gz
+  http://newverhost.com/pub/commons/exec/binaries/commons-exec-1.1-bin.tar.gz
+  http://newverhost.com/pub/commons/fileupload/binaries/commons-fileupload-1.2.2-bin.tar.gz
+  http://newverhost.com/pub/commons/io/binaries/commons-io-2.3-bin.tar.gz
+  http://newverhost.com/pub/commons/jci/binaries/commons-jci-1.0-bin.tar.gz
+  http://newverhost.com/pub/commons/jcs/binaries/jcs-1.3.tar.gz
+  http://newverhost.com/pub/commons/jexl/binaries/commons-jexl-2.1.1-bin.tar.gz
+  http://newverhost.com/pub/commons/jxpath/binaries/commons-jxpath-1.3-bin.tar.gz
+  http://newverhost.com/pub/commons/lang/binaries/commons-lang3-3.1-bin.tar.gz
+  http://newverhost.com/pub/commons/logging/binaries/commons-logging-1.1.1-bin.tar.gz
+  http://newverhost.com/pub/commons/math/binaries/commons-math3-3.0-bin.tar.gz
+  http://newverhost.com/pub/commons/modeler/binaries/commons-modeler-2.0.1.tar.gz
+  http://newverhost.com/pub/commons/net/binaries/commons-net-3.1-bin.tar.gz
+  http://newverhost.com/pub/commons/pool/binaries/commons-pool-1.6-bin.tar.gz
+  http://newverhost.com/pub/commons/primitives/binaries/commons-primitives-1.0.tar.gz
+  http://newverhost.com/pub/commons/proxy/binaries/commons-proxy-1.0.tar.gz
+  http://newverhost.com/pub/commons/sanselan/binaries/apache-sanselan-incubating-0.97-bin.tar.gz
+  http://newverhost.com/pub/commons/scxml/binaries/commons-scxml-0.9-bin.tar.gz
+  http://newverhost.com/pub/commons/transaction/binaries/commons-transaction-1.2.tar.gz
+  http://newverhost.com/pub/commons/validator/binaries/commons-validator-1.4.0-bin.tar.gz
+  http://newverhost.com/pub/commons/vfs/binaries/commons-vfs-2.0.tar.gz
+)
+
+md5sums=(
+  47d037449aa38b6c8e181abcfaf36b2b # commons-attributes
+  19bffd7f217b0eae415f1ef87af2f0bc # commons-bcel
+  d8ca23e7048cebc5e3898efb6bff1fc8 # commons-beanutils
+  4d87a842edf75407e9bae380fcc6bbab # commons-betwixt
+  5e360abc01931d237612bd6a02870216 # commons-bsf
+  42d6a4fd3316f88a01eeb0e0c0f89e0f # commons-chain
+  a05956c9ac8bacdc2b8d07fb2cb331ce # commons-cli
+  2800b0e01eee7111a1f5a89425cd760b # commons-codec
+  6f5b078f01dd0c3910cc04898bf39924 # commons-collections
+  08f62bd2376ddc4219a5d5e4afcadbdf # commons-compress
+  9a0fefe4c0e693fda7271b44fe3d6852 # commons-configuration
+  3be9edfae6aff43bde02c39fc7c0f64c # commons-daemon
+  36d5a1daa9d477d00cd3ad80226325c5 # commons-daemon-native
+  bd272e9611b0d880fd02493377d4691b # commons-dbcp
+  6d541bf457f6e2c837fd3350f98db984 # commons-dbutils
+  b67dba335877e5470b1220fadd3501ad # commons-digester
+  fb856b9689bdc4c52f8ae999057f89fc # commons-el
+  e72ce14f3e39248251b9501f429ce872 # commons-exec
+  fa280caadb0a31b1658167a26f73b2d6 # commons-fileupload
+  eabd2ac280c156bb1be38a9551df1ffb # commons-io
+  256550e0c926a5f1c2602e51ff39bd97 # commons-jci
+  525bcd92b7df824c45f29e5b703c940a # commons-jcs
+  191c39588d6d14f4cdf6ce30ab9e9629 # commons-jexl
+  3e8de5516bec9f30f6e43842acade11f # commons-jxpath
+  c105c55dc6f92c8ed20d1034be9b182a # commons-lang3
+  e5de09672af9b386c30a311654d8541a # commons-logging
+  83659be6765ffdd95a8442054d77f94a # commons-math
+  f2b611f25bfbb2ed9a1a145653d9d023 # commons-modeler
+  981137bb8155b5b44e6ce5f66c896bb0 # commons-net
+  70a1573d13d76fa3bafe4ee163904e24 # commons-pool
+  2ce92656204f2fa63dad6dfa88e1458b # commons-primitives
+  0a0ff60ce58634de21082318de0ce8f6 # commons-proxy
+  ba40878cc2831913a4c15a39d2cc1d8f # commons-sanselan
+  93c31860c28365080f8f429d533f5cbd # commons-scxml
+  c4f9ddec9a575249066c6948ffafe368 # commons-transaction
+  208137136d01c8d6e4859c43f36a75de # commons-validator
+  0e6295d228973fe13ad88d6ab803d4b7 # commons-vfs
+)
+
+build () {
+
+  # Build commons-daemon natives.
+  cd ${srcdir}/commons-daemon-1.0.10-native-src/unix
+  ./configure --prefix=/usr
+  make
+}
+
+package () {
+
+  # commons-attributes package
+  install -Dm644 ${srcdir}/commons-attributes-2.2/commons-attributes-api-2.2.jar ${pkgdir}/usr/share/java/commons/attributes-api.jar
+  install -Dm644 ${srcdir}/commons-attributes-2.2/commons-attributes-compiler-2.2.jar ${pkgdir}/usr/share/java/commons/attributes-compiler.jar
+  install -Dm644 ${srcdir}/commons-attributes-2.2/commons-attributes-plugin-2.2.jar ${pkgdir}/usr/share/java/commons/attributes-plugin.jar
+
+  # commons-bcel package
+  install -Dm644 ${srcdir}/bcel-5.2/bcel-5.2.jar ${pkgdir}/usr/share/java/commons/bcel.jar
+
+  # commons-beanutils package
+  install -Dm644 ${srcdir}/commons-beanutils-1.8.3/commons-beanutils-1.8.3.jar ${pkgdir}/usr/share/java/commons/beanutils.jar
+  install -Dm644 ${srcdir}/commons-beanutils-1.8.3/commons-beanutils-1.8.3-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/beanutils-javadoc.jar
+  install -Dm644 ${srcdir}/commons-beanutils-1.8.3/commons-beanutils-1.8.3-sources.jar ${pkgdir}/usr/share/java/commons/sources/beanutils-sources.jar
+  install -Dm644 ${srcdir}/commons-beanutils-1.8.3/commons-beanutils-bean-collections-1.8.3.jar ${pkgdir}/usr/share/java/commons/beanutils-bean-collections.jar
+  install -Dm644 ${srcdir}/commons-beanutils-1.8.3/commons-beanutils-core-1.8.3.jar ${pkgdir}/usr/share/java/commons/beanutils-core.jar
+
+  # commons-betwixt package
+  install -Dm644 ${srcdir}/commons-betwixt-0.8/commons-betwixt-0.8.jar ${pkgdir}/usr/share/java/commons/betwixt.jar
+
+  # commons-bsf package
+  install -Dm644 ${srcdir}/bsf-2.4.0/lib/bsf.jar ${pkgdir}/usr/share/java/commons/bsf.jar
+
+  # commons-chain package
+  install -Dm644 ${srcdir}/commons-chain-1.2/commons-chain-1.2.jar ${pkgdir}/usr/share/java/commons/chain.jar
+  install -Dm644 ${srcdir}/commons-chain-1.2/commons-chain-1.2-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/chain-javadoc.jar
+  install -Dm644 ${srcdir}/commons-chain-1.2/commons-chain-1.2-sources.jar ${pkgdir}/usr/share/java/commons/sources/chain-sources.jar
+
+  # commons-cli package
+  install -Dm644 ${srcdir}/commons-cli-1.2/commons-cli-1.2.jar ${pkgdir}/usr/share/java/commons/cli.jar
+  install -Dm644 ${srcdir}/commons-cli-1.2/commons-cli-1.2-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/cli-javadoc.jar
+  install -Dm644 ${srcdir}/commons-cli-1.2/commons-cli-1.2-sources.jar ${pkgdir}/usr/share/java/commons/sources/cli-sources.jar
+
+  # commons-codec package
+  install -Dm644 ${srcdir}/commons-codec-1.6/commons-codec-1.6.jar ${pkgdir}/usr/share/java/commons/codec.jar
+  install -Dm644 ${srcdir}/commons-codec-1.6/commons-codec-1.6-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/codec-javadoc.jar
+  install -Dm644 ${srcdir}/commons-codec-1.6/commons-codec-1.6-sources.jar ${pkgdir}/usr/share/java/commons/sources/codec-sources.jar
+  install -Dm644 ${srcdir}/commons-codec-1.6/commons-codec-1.6-tests.jar ${pkgdir}/usr/share/java/commons/tests/codec-tests.jar
+
+  # commons-collections package
+  install -Dm644 ${srcdir}/commons-collections-3.2.1/commons-collections-3.2.1.jar ${pkgdir}/usr/share/java/commons/collections.jar
+  install -Dm644 ${srcdir}/commons-collections-3.2.1/commons-collections-3.2.1-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/collections-javadoc.jar
+  install -Dm644 ${srcdir}/commons-collections-3.2.1/commons-collections-3.2.1-sources.jar ${pkgdir}/usr/share/java/commons/sources/collections-sources.jar
+  install -Dm644 ${srcdir}/commons-collections-3.2.1/commons-collections-testframework-3.2.1.jar ${pkgdir}/usr/share/java/commons/tests/collections-testframework.jar
+
+  # commons-compress package
+  install -Dm644 ${srcdir}/commons-compress-1.4/commons-compress-1.4.jar ${pkgdir}/usr/share/java/commons/compress.jar
+  install -Dm644 ${srcdir}/commons-compress-1.4/commons-compress-1.4-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/compress-javadoc.jar
+  install -Dm644 ${srcdir}/commons-compress-1.4/commons-compress-1.4-sources.jar ${pkgdir}/usr/share/java/commons/sources/compress-sources.jar
+  install -Dm644 ${srcdir}/commons-compress-1.4/commons-compress-1.4-tests.jar ${pkgdir}/usr/share/java/commons/tests/compress-tests.jar
+  install -Dm644 ${srcdir}/commons-compress-1.4/commons-compress-1.4-test-sources.jar ${pkgdir}/usr/share/java/commons/sources/compress-test-sources.jar
+
+  # commons-configuration package
+  install -Dm644 ${srcdir}/commons-configuration-1.8/commons-configuration-1.8.jar ${pkgdir}/usr/share/java/commons/configuration.jar
+  install -Dm644 ${srcdir}/commons-configuration-1.8/commons-configuration-1.8-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/configuration-javadoc.jar
+  install -Dm644 ${srcdir}/commons-configuration-1.8/commons-configuration-1.8-sources.jar ${pkgdir}/usr/share/java/commons/sources/configuration-sources.jar
+
+  # commons-daemon package
+  install -Dm644 ${srcdir}/commons-daemon-1.0.10/commons-daemon-1.0.10.jar ${pkgdir}/usr/share/java/commons/daemon.jar
+  install -Dm644 ${srcdir}/commons-daemon-1.0.10/commons-daemon-1.0.10-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/daemon-javadoc.jar
+  install -Dm644 ${srcdir}/commons-daemon-1.0.10/commons-daemon-1.0.10-sources.jar ${pkgdir}/usr/share/java/commons/sources/daemon-sources.jar
+
+  # commons-daemon natives
+  install -Dm644 ${srcdir}/commons-daemon-1.0.10-native-src/unix/jsvc ${pkgdir}/usr/bin/jsvc
+
+  # commons-dbcp package
+  install -Dm644 ${srcdir}/commons-dbcp-1.4/commons-dbcp-1.4.jar ${pkgdir}/usr/share/java/commons/dbcp.jar
+  install -Dm644 ${srcdir}/commons-dbcp-1.4/commons-dbcp-1.4-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/dbcp-javadoc.jar
+  install -Dm644 ${srcdir}/commons-dbcp-1.4/commons-dbcp-1.4-sources.jar ${pkgdir}/usr/share/java/commons/sources/dbcp-sources.jar
+
+  # commons-dbutils package
+  install -Dm644 ${srcdir}/commons-dbutils-1.4/commons-dbutils-1.4.jar ${pkgdir}/usr/share/java/commons/dbutils.jar
+  install -Dm644 ${srcdir}/commons-dbutils-1.4/commons-dbutils-1.4-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/dbutils-javadoc.jar
+  install -Dm644 ${srcdir}/commons-dbutils-1.4/commons-dbutils-1.4-sources.jar ${pkgdir}/usr/share/java/commons/sources/dbutils-sources.jar
+
+  # commons-digester package
+  install -Dm644 ${srcdir}/commons-digester3-3.2/commons-digester3-3.2.jar ${pkgdir}/usr/share/java/commons/digester.jar
+  install -Dm644 ${srcdir}/commons-digester3-3.2/commons-digester3-3.2-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/digester-javadoc.jar
+  install -Dm644 ${srcdir}/commons-digester3-3.2/commons-digester3-3.2-sources.jar ${pkgdir}/usr/share/java/commons/sources/digester-sources.jar
+  install -Dm644 ${srcdir}/commons-digester3-3.2/commons-digester3-3.2-with-deps.jar ${pkgdir}/usr/share/java/commons/digester-with-deps.jar
+
+  # commons-el package
+  install -Dm644 ${srcdir}/commons-el-1.0/commons-el.jar ${pkgdir}/usr/share/java/commons/el.jar
+
+  # commons-exec package
+  install -Dm644 ${srcdir}/commons-exec-1.1/commons-exec-1.1.jar ${pkgdir}/usr/share/java/commons/exec.jar
+  install -Dm644 ${srcdir}/commons-exec-1.1/commons-exec-1.1-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/exec-javadoc.jar
+  install -Dm644 ${srcdir}/commons-exec-1.1/commons-exec-1.1-sources.jar ${pkgdir}/usr/share/java/commons/sources/exec-sources.jar
+
+  # commons-io package
+  install -Dm644 ${srcdir}/commons-io-2.3/commons-io-2.3.jar ${pkgdir}/usr/share/java/commons/io.jar
+  install -Dm644 ${srcdir}/commons-io-2.3/commons-io-2.3-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/io-javadoc.jar
+  install -Dm644 ${srcdir}/commons-io-2.3/commons-io-2.3-sources.jar ${pkgdir}/usr/share/java/commons/sources/io-sources.jar
+  install -Dm644 ${srcdir}/commons-io-2.3/commons-io-2.3-tests.jar ${pkgdir}/usr/share/java/commons/tests/io-tests.jar
+  install -Dm644 ${srcdir}/commons-io-2.3/commons-io-2.3-test-sources.jar ${pkgdir}/usr/share/java/commons/sources/io-test-sources.jar
+
+  # commons-jci package
+  install -Dm644 ${srcdir}/commons-jci-1.0-bin/lib/commons-jci-core-1.0.jar ${pkgdir}/usr/share/java/commons/jci-core.jar
+  install -Dm644 ${srcdir}/commons-jci-1.0-bin/lib/commons-jci-eclipse-1.0.jar ${pkgdir}/usr/share/java/commons/jci-eclipse.jar
+  install -Dm644 ${srcdir}/commons-jci-1.0-bin/lib/commons-jci-examples-1.0.jar ${pkgdir}/usr/share/java/commons/examples/jci-examples.jar
+  install -Dm644 ${srcdir}/commons-jci-1.0-bin/lib/commons-jci-fam-1.0.jar ${pkgdir}/usr/share/java/commons/jci-fam.jar
+  install -Dm644 ${srcdir}/commons-jci-1.0-bin/lib/commons-jci-groovy-1.0.jar ${pkgdir}/usr/share/java/commons/jci-groovy.jar
+  install -Dm644 ${srcdir}/commons-jci-1.0-bin/lib/commons-jci-janino-1.0.jar ${pkgdir}/usr/share/java/commons/jci-janino.jar
+  install -Dm644 ${srcdir}/commons-jci-1.0-bin/lib/commons-jci-javac-1.0.jar ${pkgdir}/usr/share/java/commons/jci-javac.jar
+  install -Dm644 ${srcdir}/commons-jci-1.0-bin/lib/commons-jci-rhino-1.0.jar ${pkgdir}/usr/share/java/commons/jci-rhino.jar
+
+  # commons-jexl
+  install -Dm644 ${srcdir}/commons-jexl-2.1.1/commons-jexl-2.1.1.jar ${pkgdir}/usr/share/java/commons/jexl.jar
+  install -Dm644 ${srcdir}/commons-jexl-2.1.1/commons-jexl-2.1.1-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/jexl-javadoc.jar
+  install -Dm644 ${srcdir}/commons-jexl-2.1.1/commons-jexl-2.1.1-sources.jar ${pkgdir}/usr/share/java/commons/sources/jexl-sources.jar
+  install -Dm644 ${srcdir}/commons-jexl-2.1.1/commons-jexl-2.1.1-tests.jar ${pkgdir}/usr/share/java/commons/tests/jexl-tests.jar
+
+  # commons-jxpath
+  install -Dm644 ${srcdir}/commons-jxpath-1.3/commons-jxpath-1.3.jar ${pkgdir}/usr/share/java/commons/jxpath.jar
+  install -Dm644 ${srcdir}/commons-jxpath-1.3/commons-jxpath-1.3-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/jxpath-javadoc.jar
+  install -Dm644 ${srcdir}/commons-jxpath-1.3/commons-jxpath-1.3-sources.jar ${pkgdir}/usr/share/java/commons/sources/jxpath-sources.jar
+
+  # commons-lang3
+  install -Dm644 ${srcdir}/commons-lang3-3.1/commons-lang3-3.1.jar ${pkgdir}/usr/share/java/commons/lang.jar
+  install -Dm644 ${srcdir}/commons-lang3-3.1/commons-lang3-3.1-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/lang-javadoc.jar
+  install -Dm644 ${srcdir}/commons-lang3-3.1/commons-lang3-3.1-sources.jar ${pkgdir}/usr/share/java/commons/sources/lang-sources.jar
+  install -Dm644 ${srcdir}/commons-lang3-3.1/commons-lang3-3.1-tests.jar ${pkgdir}/usr/share/java/commons/tests/lang-tests.jar
+
+  # commons-logging
+  install -Dm644 ${srcdir}/commons-logging-1.1.1/commons-logging-1.1.1.jar ${pkgdir}/usr/share/java/commons/logging.jar
+  install -Dm644 ${srcdir}/commons-logging-1.1.1/commons-logging-1.1.1-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/logging-javadoc.jar
+  install -Dm644 ${srcdir}/commons-logging-1.1.1/commons-logging-1.1.1-sources.jar ${pkgdir}/usr/share/java/commons/sources/logging-sources.jar
+  install -Dm644 ${srcdir}/commons-logging-1.1.1/commons-logging-adapters-1.1.1.jar ${pkgdir}/usr/share/java/commons/logging-adapters.jar
+  install -Dm644 ${srcdir}/commons-logging-1.1.1/commons-logging-api-1.1.1.jar ${pkgdir}/usr/share/java/commons/logging-api.jar
+  install -Dm644 ${srcdir}/commons-logging-1.1.1/commons-logging-tests.jar ${pkgdir}/usr/share/java/commons/tests/logging-tests.jar
+
+  # commons-math
+  install -Dm644 ${srcdir}/commons-math3-3.0/commons-math3-3.0.jar ${pkgdir}/usr/share/java/commons/math.jar
+  install -Dm644 ${srcdir}/commons-math3-3.0/commons-math3-3.0-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/math-javadoc.jar
+  install -Dm644 ${srcdir}/commons-math3-3.0/commons-math3-3.0-sources.jar ${pkgdir}/usr/share/java/commons/sources/math-sources.jar
+
+  # commons-modeler
+  install -Dm644 ${srcdir}/commons-modeler-2.0.1/commons-modeler-2.0.1.jar ${pkgdir}/usr/share/java/commons/modeler.jar
+  install -Dm644 ${srcdir}/commons-modeler-2.0.1/commons-modeler-2.0.1-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/modeler-javadoc.jar
+  install -Dm644 ${srcdir}/commons-modeler-2.0.1/commons-modeler-2.0.1-sources.jar ${pkgdir}/usr/share/java/commons/sources/modeler-sources.jar
+
+  # commons-net
+  install -Dm644 ${srcdir}/commons-net-3.1/commons-net-3.1.jar ${pkgdir}/usr/share/java/commons/net.jar
+  install -Dm644 ${srcdir}/commons-net-3.1/commons-net-3.1-sources.jar ${pkgdir}/usr/share/java/commons/sources/net-sources.jar
+  install -Dm644 ${srcdir}/commons-net-3.1/commons-net-examples-3.1.jar ${pkgdir}/usr/share/java/commons/examples/net-examples.jar
+
+  # commons-pool
+  install -Dm644 ${srcdir}/commons-pool-1.6/commons-pool-1.6.jar ${pkgdir}/usr/share/java/commons/pool.jar
+  install -Dm644 ${srcdir}/commons-pool-1.6/commons-pool-1.6-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/pool-javadoc.jar
+  install -Dm644 ${srcdir}/commons-pool-1.6/commons-pool-1.6-sources.jar ${pkgdir}/usr/share/java/commons/sources/pool-sources.jar
+
+  # commons-primitives
+  install -Dm644 ${srcdir}/commons-primitives-1.0/commons-primitives-1.0.jar ${pkgdir}/usr/share/java/commons/primitives.jar
+
+  # commons-proxy
+  install -Dm644 ${srcdir}/commons-proxy-1.0/commons-proxy-1.0.jar ${pkgdir}/usr/share/java/commons/proxy.jar
+  install -Dm644 ${srcdir}/commons-proxy-1.0/commons-proxy-1.0-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/proxy-javadoc.jar
+  install -Dm644 ${srcdir}/commons-proxy-1.0/commons-proxy-1.0-sources.jar ${pkgdir}/usr/share/java/commons/sources/proxy-sources.jar
+
+  # commons-scxml
+  install -Dm644 ${srcdir}/commons-scxml-0.9/commons-scxml-0.9.jar ${pkgdir}/usr/share/java/commons/scxml.jar
+  install -Dm644 ${srcdir}/commons-scxml-0.9/commons-scxml-0.9-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/scxml-javadoc.jar
+  install -Dm644 ${srcdir}/commons-scxml-0.9/commons-scxml-0.9-sources.jar ${pkgdir}/usr/share/java/commons/sources/scxml-sources.jar
+
+  # commons-transaction
+  install -Dm644 ${srcdir}/commons-transaction-1.2/commons-transaction-1.2.jar ${pkgdir}/usr/share/java/commons/transaction.jar
+
+  # commons-validator
+  install -Dm644 ${srcdir}/commons-validator-1.4.0/commons-validator-1.4.0.jar ${pkgdir}/usr/share/java/commons/validator.jar
+  install -Dm644 ${srcdir}/commons-validator-1.4.0/commons-validator-1.4.0-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/validator-javadoc.jar
+  install -Dm644 ${srcdir}/commons-validator-1.4.0/commons-validator-1.4.0-sources.jar ${pkgdir}/usr/share/java/commons/sources/validator-sources.jar
+
+  # commons-vfs
+  install -Dm644 ${srcdir}/commons-vfs-2.0/commons-vfs2-2.0.jar ${pkgdir}/usr/share/java/commons/vfs.jar
+  install -Dm644 ${srcdir}/commons-vfs-2.0/commons-vfs2-2.0-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/vfs-javadoc.jar
+  install -Dm644 ${srcdir}/commons-vfs-2.0/commons-vfs2-2.0-sources.jar ${pkgdir}/usr/share/java/commons/sources/vfs-sources.jar
+  install -Dm644 ${srcdir}/commons-vfs-2.0/commons-vfs2-2.0-tests.jar ${pkgdir}/usr/share/java/commons/tests/vfs-tests.jar
+  install -Dm644 ${srcdir}/commons-vfs-2.0/commons-vfs2-2.0-test-sources.jar ${pkgdir}/usr/share/java/commons/sources/vfs-test-sources.jar
+  install -Dm644 ${srcdir}/commons-vfs-2.0/commons-vfs2-examples-2.0.jar ${pkgdir}/usr/share/java/commons/examples/vfs-examples.jar
+  install -Dm644 ${srcdir}/commons-vfs-2.0/commons-vfs2-examples-2.0-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/vfs-examples-javadoc.jar
+  install -Dm644 ${srcdir}/commons-vfs-2.0/commons-vfs2-examples-2.0-sources.jar ${pkgdir}/usr/share/java/commons/sources/vfs-examples-sources.jar
+
+}
