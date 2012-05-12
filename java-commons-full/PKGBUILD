@@ -159,7 +159,7 @@ package () {
   install -Dm644 ${srcdir}/commons-daemon-1.0.10/commons-daemon-1.0.10-sources.jar ${pkgdir}/usr/share/java/commons/sources/daemon-sources.jar
 
   # commons-daemon natives
-  install -Dm644 ${srcdir}/commons-daemon-1.0.10-native-src/unix/jsvc ${pkgdir}/usr/bin/jsvc
+  install -Dm755 ${srcdir}/commons-daemon-1.0.10-native-src/unix/jsvc ${pkgdir}/usr/bin/jsvc
 
   # commons-dbcp package
   install -Dm644 ${srcdir}/commons-dbcp-1.4/commons-dbcp-1.4.jar ${pkgdir}/usr/share/java/commons/dbcp.jar

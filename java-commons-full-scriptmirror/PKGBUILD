@@ -1,13 +1,16 @@
+# Maintainer: Benjamin A. Shelton <zancarius@gmail.com>
+
 pkgname=java-commons-full
 pkgver=20120511
 pkgrel=1
-pkgdesc="Full collection of all Apache Java commons files, complete with random mirror generation."
+pkgdesc="Full collection of (almost) all Apache Commons libraries, complete with random mirror generation. This is the TESTING version; don't submit to AUR as it has mirror-generation code that would be unacceptable (plus it fails periodically)!"
 arch=(any)
 license=(APACHE)
 depends=(java-runtime)
 
 _pickMirror () {
-  mirrors=(http://www.eng.lsu.edu/mirrors/apache/commons/
+  mirrors=(
+    http://www.eng.lsu.edu/mirrors/apache/commons/
     http://mirror.uoregon.edu/apache/commons/
     http://www.reverse.net/pub/apache/commons/
     http://apache.mirrors.lucidnetworks.net/commons/
@@ -194,7 +197,7 @@ package () {
   install -Dm644 ${srcdir}/commons-daemon-1.0.10/commons-daemon-1.0.10-sources.jar ${pkgdir}/usr/share/java/commons/sources/daemon-sources.jar
 
   # commons-daemon natives
-  install -Dm644 ${srcdir}/commons-daemon-1.0.10-native-src/unix/jsvc ${pkgdir}/usr/bin/jsvc
+  install -Dm755 ${srcdir}/commons-daemon-1.0.10-native-src/unix/jsvc ${pkgdir}/usr/bin/jsvc
 
   # commons-dbcp package
   install -Dm644 ${srcdir}/commons-dbcp-1.4/commons-dbcp-1.4.jar ${pkgdir}/usr/share/java/commons/dbcp.jar
