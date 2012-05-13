@@ -1,5 +1,6 @@
 # coding: utf-8
 
+import httplib
 import json
 import os
 import re
@@ -32,20 +33,42 @@ class DirectoryList(list):
         if os.path.isdir(item):
             super(DirectoryList, self).append(item)
 
-class Config(object):
+def config (path):
+    if os.path.exists(path):
+        config = json.load(open(path, "r"))
+    else:
+        config = json.loads(path)
+    return config
 
-    def __init__ (self, config=""):
+class Package(object):
+    def __init__ (self, path):
+        self.path = path
+        self.config = config(path + os.path.sep + "version-info.json")
+        self.package = open(path + os.path.sep + "PKGBUILD", "r").read()
+        self.name = self.readName()
 
-        self.config = {}
+        self.fetchVersion()
 
-        if os.path.exists(config):
-            print "file"
-            self.config = json.load(open(config, "r"))
-        else:
-            print "string"
-            self.config = json.loads(config)
+    def fetchVersion (self):
+        '''Fetches version information, usually from remote sites.'''
+        aliases = self.config["packages"]["list-aliases"]
+        packages = self.config["packages"]["list"]
 
-        print self.config
+        for package in packages:
+            name = package
+            if aliases.has_key(package):
+                name = aliases[package]
+            
+            
+
+            return
+
+    def readName (self):
+        '''Reads the package name from the PKGBUILD.'''
+        regs = re.compile("^pkgname=(.*)$", re.MULTILINE)
+        matches = regs.search(self.package)
+        if matches:
+            self.name = matches.groups()[0]
 
 class Check(object):
 
@@ -77,4 +100,5 @@ class Check(object):
                 os.path.sep + "version-info.json"):
                 pkgdirs += self.pkgroot + os.path.sep + pkgdir
 
-        print pkgdirs
+        for pkgdir in pkgdirs:
+            package = Package(pkgdir)
