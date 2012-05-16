@@ -42,7 +42,7 @@ package () {
   install -Dm644 ${srcdir}/${pkgname}-${pkgver}/std-index.txt ${pkgdir}/usr/share/miscfiles/std-index.txt
   install -Dm644 ${srcdir}/${pkgname}-${pkgver}/top-level.domains ${pkgdir}/usr/share/miscfiles/top-level.domains
   install -Dm644 ${srcdir}/${pkgname}-${pkgver}/unicode ${pkgdir}/usr/share/miscfiles/unicode
-  install -Dm644 ${srcdir}/${pkgname}-${pkgver}/web2 ${pkgdir}/usr/share/words/web2
-  install -Dm644 ${srcdir}/${pkgname}-${pkgver}/web2a ${pkgdir}/usr/share/words/web2a
+  install -Dm644 ${srcdir}/${pkgname}-${pkgver}/web2 ${pkgdir}/usr/share/dict/web2
+  install -Dm644 ${srcdir}/${pkgname}-${pkgver}/web2a ${pkgdir}/usr/share/dict/web2a
 
 }
