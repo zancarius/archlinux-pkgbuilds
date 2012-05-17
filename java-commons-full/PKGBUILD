@@ -1,7 +1,13 @@
 # Maintainer: Benjamin A. Shelton <zancarius@gmail.com>
 # Source: https://github.com/zancarius/archlinux-pkgbuilds
+
+# This PKGBUILD contains non-trivial logic for determining package versions
+# and should NOT be submitted to the AUR. This is a convenience package build
+# ONLY and breaks many conventions used in Arch in addition to increasing the
+# likelihood that AUR or PKGBUILD utilities might break when spoonfed this file.
+
 pkgname=java-commons-full
-pkgver=20120511
+pkgver=20120517
 pkgrel=1
 pkgdesc="Full collection of (almost) all Apache Commons libraries."
 arch=(any)
@@ -41,7 +47,7 @@ _versions["net"]=3.1
 _versions["pool"]=1.6
 _versions["primitives"]=1.0
 _versions["proxy"]=1.0
-_versions["imaging"]=0.97
+_versions["sanselan"]=0.97
 _versions["scxml"]=0.9
 _versions["transaction"]=1.2
 _versions["validator"]=1.4.0
@@ -80,7 +86,7 @@ source=(
   http://download.nextag.com/apache/commons/pool/binaries/commons-pool-${_versions["pool"]}-bin.tar.gz
   http://mirror.candidhosting.com/pub/apache/commons/primitives/binaries/commons-primitives-${_versions["primitives"]}.tar.gz
   http://apache.petsads.us/commons/proxy/binaries/commons-proxy-${_versions["proxy"]}.tar.gz
-  http://mirror.candidhosting.com/pub/apache/commons/sanselan/binaries/apache-sanselan-incubating-${_versions["imaging"]}-bin.tar.gz
+  http://mirror.candidhosting.com/pub/apache/commons/sanselan/binaries/apache-sanselan-incubating-${_versions["sanselan"]}-bin.tar.gz
   http://mirrors.gigenet.com/apache/commons/scxml/binaries/commons-scxml-${_versions["scxml"]}-bin.tar.gz
   http://newverhost.com/pub/commons/transaction/binaries/commons-transaction-${_versions["transaction"]}.tar.gz
   http://www.reverse.net/pub/apache/commons/validator/binaries/commons-validator-${_versions["validator"]}-bin.tar.gz
@@ -225,7 +231,7 @@ package () {
   install -Dm644 ${srcdir}/commons-exec-${_versions["exec"]}/commons-exec-${_versions["exec"]}-sources.jar ${pkgdir}/usr/share/java/commons/sources/exec-sources.jar
 
   # commons-fileupload
-  install -Dm644 ${srcdir}/commons-fileupload-${_versions["fileupload"]}/lib/commons-fileupload-${_versions["fileupload"]}.jar ${pkgdir}/usr/share/java/commons/fileupload.js
+  install -Dm644 ${srcdir}/commons-fileupload-${_versions["fileupload"]}/lib/commons-fileupload-${_versions["fileupload"]}.jar ${pkgdir}/usr/share/java/commons/fileupload.jar
 
   # commons-io package
   install -Dm644 ${srcdir}/commons-io-${_versions["io"]}/commons-io-${_versions["io"]}.jar ${pkgdir}/usr/share/java/commons/io.jar
@@ -301,9 +307,9 @@ package () {
   install -Dm644 ${srcdir}/commons-proxy-${_versions["proxy"]}/commons-proxy-${_versions["proxy"]}-sources.jar ${pkgdir}/usr/share/java/commons/sources/proxy-sources.jar
 
   # commons-sanselan
-  install -Dm644 ${srcdir}/sanselan-${_versions["imaging"]}-incubator/sanselan-${_versions["imaging"]}-incubator.jar ${pkgdir}/usr/share/java/commons/sanselan.jar
-  install -Dm644 ${srcdir}/sanselan-${_versions["imaging"]}-incubator/sanselan-${_versions["imaging"]}-incubator-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/sanselan-javadoc.jar
-  install -Dm644 ${srcdir}/sanselan-${_versions["imaging"]}-incubator/sanselan-${_versions["imaging"]}-incubator-sources.jar ${pkgdir}/usr/share/java/commons/sources/sanselan-sources.jar
+  install -Dm644 ${srcdir}/sanselan-${_versions["sanselan"]}-incubator/sanselan-${_versions["sanselan"]}-incubator.jar ${pkgdir}/usr/share/java/commons/sanselan.jar
+  install -Dm644 ${srcdir}/sanselan-${_versions["sanselan"]}-incubator/sanselan-${_versions["sanselan"]}-incubator-javadoc.jar ${pkgdir}/usr/share/java/commons/javadoc/sanselan-javadoc.jar
+  install -Dm644 ${srcdir}/sanselan-${_versions["sanselan"]}-incubator/sanselan-${_versions["sanselan"]}-incubator-sources.jar ${pkgdir}/usr/share/java/commons/sources/sanselan-sources.jar
 
   # commons-scxml
   install -Dm644 ${srcdir}/commons-scxml-${_versions["scxml"]}/commons-scxml-${_versions["scxml"]}.jar ${pkgdir}/usr/share/java/commons/scxml.jar
