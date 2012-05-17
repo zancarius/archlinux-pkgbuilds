@@ -1,7 +1,7 @@
 # Maintainer: Benjamin A. Shelton <zancarius@gmail.com>
 # Based on the official PKGBUILD for GiMP 2.8 by Daniel Isenmann <daniel@archlinux.org>.
 
-pkgname=gimp
+pkgname=gimp-26
 pkgver=2.6.12
 pkgrel=1
 pkgdesc="GNU Image Manipulation Program"
@@ -17,9 +17,10 @@ optdepends=('gutenprint: for sophisticated printing only as gimp has built-in cu
             'alsa-lib: for MIDI event controller module'
             'curl: for URI support')
 options=('!libtool' '!makeflags')
-conflicts=('gimp-devel')
-install=gimp.install
-source=(ftp://ftp.gimp.org/pub/gimp/v${pkgver%.*}/${pkgname}-${pkgver}.tar.bz2 linux.gpl 
+conflicts=('gimp-devel' 'gimp-26')
+provides=('gimp')
+install=gimp-26.install
+source=(ftp://ftp.gimp.org/pub/gimp/v${pkgver%.*}/${pkgname/[-0-9]*/}-${pkgver}.tar.bz2 linux.gpl 
         uri-backend-libcurl.patch)
 md5sums=('9f876ee63a0c4a4c83f50f32fb3bbe63'
          'bb27bc214261d36484093e857f015f38')
@@ -34,7 +35,7 @@ build() {
 }
 
 package() {
-  cd "${srcdir}/${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname/[-0-9]*/}-${pkgver}"
   make DESTDIR="${pkgdir}" install
   sed -i 's|#!/usr/bin/env python|#!/usr/bin/env python2|' "${pkgdir}"/usr/lib/gimp/2.0/plug-ins/*.py
   install -D -m644 "${srcdir}/linux.gpl" "${pkgdir}/usr/share/gimp/2.0/palettes/Linux.gpl"
