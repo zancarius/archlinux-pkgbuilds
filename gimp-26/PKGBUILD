@@ -20,8 +20,7 @@ options=('!libtool' '!makeflags')
 conflicts=('gimp-devel' 'gimp-26')
 provides=('gimp')
 install=gimp-26.install
-source=(ftp://ftp.gimp.org/pub/gimp/v${pkgver%.*}/${pkgname/[-0-9]*/}-${pkgver}.tar.bz2 linux.gpl 
-        uri-backend-libcurl.patch)
+source=(ftp://ftp.gimp.org/pub/gimp/v${pkgver%.*}/${pkgname/[-0-9]*/}-${pkgver}.tar.bz2 linux.gpl)
 md5sums=('9f876ee63a0c4a4c83f50f32fb3bbe63'
          'bb27bc214261d36484093e857f015f38')
 
