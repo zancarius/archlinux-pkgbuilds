@@ -31,8 +31,8 @@ assorted bits and pieces that are part of the standard Miscfiles
 distribution, including the Webster's Second Internation English word list
 and its appendix. If you find that the official `community/words` package
 isn't quite up to par and are more accustomed to the words list that ships
-with Gentoo, you should consider installing this one. A symlink will be
-to `/usr/share/dict/web2` will be created as `/usr/share/dict/words` if and
+with Gentoo, you should consider installing this one. A symlink to
+`/usr/share/dict/web2` will be created as `/usr/share/dict/words` if and
 only if the `words` symlink does not already exist; care is taken to avoid
 conflicts with the `community/words` package. Everything else in the
 Miscfiles distribution is installed in `/usr/share/miscfiles`.
