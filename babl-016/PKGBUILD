@@ -1,0 +1,32 @@
+# Maintainer: Benjamin A. Shelton <zancarius@gmail.com>
+# Based on the official PKGBUILD by Eric Bélanger <eric@archlinux.org>
+
+pkgname=babl-016
+pkgver=0.1.6
+pkgrel=1
+pkgdesc="Dynamic, any to any, pixel format conversion library, version 0.1.6; required for Gimp 2.6.12"
+arch=('i686' 'x86_64')
+url="http://gegl.org/babl/"
+license=('LGPL3')
+depends=('glibc')
+conflicts=('babl')
+provides=('babl')
+options=('!libtool' '!makeflags')
+source=(ftp://ftp.gimp.org/pub/babl/${pkgver%.*}/${pkgname/[-0-9]*/}-${pkgver}.tar.bz2)
+sha1sums=('3178ec9f988efe895d00e2d432ad9b6ec10211e9')
+
+build() {
+  cd "${srcdir}/${pkgname/[-0-9]*/}-${pkgver}"
+  ./configure --prefix=/usr
+  make
+}
+
+check() {
+  cd "${srcdir}/${pkgname/[-0-9]*/}-${pkgver}"
+  make check
+}
+
+package() {
+  cd "${srcdir}/${pkgname/[-0-9]*/}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+}
