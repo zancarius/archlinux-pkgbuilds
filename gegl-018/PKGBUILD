@@ -4,7 +4,7 @@
 pkgname=gegl-018
 pkgver=0.1.8
 pkgrel=2
-pkgdesc="Graph based image processing framework"
+pkgdesc="Graph based image processing framework, version 0.1.8; required for Gimp 2.6.12"
 arch=('i686' 'x86_64')
 url="http://www.gegl.org/"
 license=('GPL3' 'LGPL3')
@@ -25,11 +25,6 @@ build() {
   ./configure  --prefix=/usr  --with-sdl --with-openexr --with-librsvg \
     --with-libavformat --with-jasper --disable-docs
   make
-}
-
-check() {
-  cd "${srcdir}/${pkgname/[-0-9]*/}-${pkgver}"
-  make check
 }
 
 package() {

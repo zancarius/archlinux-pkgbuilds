@@ -11,7 +11,7 @@ license=('LGPL3')
 depends=('glibc')
 conflicts=('babl')
 provides=('babl')
-options=('!libtool' '!makeflags')
+options=('!libtool')
 source=(ftp://ftp.gimp.org/pub/babl/${pkgver%.*}/${pkgname/[-0-9]*/}-${pkgver}.tar.bz2)
 sha1sums=('3178ec9f988efe895d00e2d432ad9b6ec10211e9')
 
