@@ -1,0 +1,108 @@
+# Maintainer: Benjamin A. Shelton <zancarius@gmail.com>
+# Based off the official Arch Linux package build by
+# Ionut Biru <ibiru@archlinux.org> and Jakub Schmidtke <sjakub@gmail.com>
+# with minor additions from firefox-kde-opensus PKGBUILD by
+# Weng Xuetian <wengxt@gmail.com>.
+
+pkgname=firefox-safebrowsing-opensuse
+pkgver=13.0
+pkgrel=1
+pkgdesc="Standalone web browser from mozilla.org with openSuSE patches and SafeBrowsing enabled"
+arch=('i686' 'x86_64')
+license=('MPL' 'GPL' 'LGPL')
+depends=('gtk2' 'mozilla-common' 'libxt' 'startup-notification' 'mime-types' 'dbus-glib' 'alsa-lib'
+         'libnotify' 'desktop-file-utils' 'hicolor-icon-theme'
+         'libvpx' 'libevent' 'nss>=3.13.3' 'hunspell' 'sqlite')
+makedepends=('unzip' 'zip' 'diffutils' 'python2' 'wireless_tools' 'yasm' 'mesa'
+             'autoconf2.13' 'libidl2' 'xorg-server-xvfb' 'imake' 'gcc')
+optdepends=('wireless_tools: Location detection via available WiFi networks')
+provides=('firefox')
+conflicts=('firefox')
+url="http://www.mozilla.org/projects/firefox"
+install=firefox.install
+options=(!emptydirs)
+source=(https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/$pkgver/source/firefox-$pkgver.source.tar.bz2
+        mozconfig
+        firefox.desktop
+        firefox-install-dir.patch
+        vendor.js
+        firefox-browser-css.patch
+        firefox-cross-desktop.patch
+        firefox-kde.patch
+        kde.js
+        mozilla-kde.patch
+        mozilla-nongnome-proxies.patch)
+md5sums=('f50ca7656eec47030b396f39075fa980'
+         '591d7173a7f5bc0ee01124fca80f3782'
+         'bdeb0380c7fae30dd0ead6d2d3bc5873'
+         '594523c536a9be951b52c90dd85aff18'
+         '0d053487907de4376d67d8f499c5502b'
+         '90cc234d848a2060abc6a007622e1af7'
+         '6e7b4f2554beacb998bbce3f0e184584'
+         'ea852561bc568922b25548c8d5367aee'
+         '75df0f88cc7a7fa7d522459e4ff82cc5'
+         '4ab126609ed4362c298b5c59aa3d25c7'
+         '8b0ecfdf697485d7b7dd26291c0dc478')
+
+build() {
+  cd mozilla-release
+
+  cp ../mozconfig .mozconfig
+  install -m 644 "${srcdir}/kde.js" browser/app/profile/kde.js
+  
+  patch -Np1 -i ../firefox-install-dir.patch
+  
+  patch -Np1 -i ../mozilla-nongnome-proxies.patch
+  patch -Np1 -i ../mozilla-kde.patch
+  patch -Np1 -i ../firefox-cross-desktop.patch
+  patch -Np1 -i ../firefox-kde.patch
+  patch -Np1 -i ../firefox-browser-css.patch
+
+  # Fix PRE_RELEASE_SUFFIX
+  sed -i '/^PRE_RELEASE_SUFFIX := ""/s/ ""//' \
+    browser/base/Makefile.in
+
+  #export CC=gcc-4.6
+  #export CXX=g++-4.6
+
+  export LDFLAGS="$LDFLAGS -Wl,-rpath,/usr/lib/firefox"
+  export PYTHON="/usr/bin/python2"
+  export MOZ_MAKE_FLAGS="$MAKEFLAGS"
+  unset MAKEFLAGS
+
+  # Enable PGO
+  export MOZ_PGO=1
+  export DISPLAY=:99
+  Xvfb -nolisten tcp -extension GLX -screen 0 1280x1024x24 $DISPLAY &
+
+  make -f client.mk build
+
+  kill $! || true
+}
+
+package() {
+  cd mozilla-release
+  make -j1 -f client.mk DESTDIR="$pkgdir" install
+
+  install -m644 ../vendor.js "$pkgdir/usr/lib/firefox/defaults/pref"
+
+  for i in 16 22 24 32 48 256; do
+      install -Dm644 browser/branding/official/default$i.png \
+        "$pkgdir/usr/share/icons/hicolor/${i}x${i}/apps/firefox.png"
+  done
+
+  install -Dm644 ../firefox.desktop \
+    "$pkgdir/usr/share/applications/firefox.desktop"
+
+  # Use system-provided dictionaries
+  rm -rf "$pkgdir"/usr/lib/firefox/{dictionaries,hyphenation}
+  ln -s /usr/share/hunspell "$pkgdir/usr/lib/firefox/dictionaries"
+  ln -s /usr/share/hyphen "$pkgdir/usr/lib/firefox/hyphenation"
+
+  # We don't want the development stuff
+  rm -r "$pkgdir"/usr/{include,lib/firefox-devel,share/idl}
+
+  #workaround for now
+  #https://bugzilla.mozilla.org/show_bug.cgi?id=658850
+  ln -sf firefox "$pkgdir/usr/lib/firefox/firefox-bin"
+}
