@@ -5,7 +5,7 @@
 # Weng Xuetian <wengxt@gmail.com>.
 
 pkgname=firefox-safebrowsing-opensuse
-pkgver=13.0
+pkgver=13.0.1
 pkgrel=1
 pkgdesc="Standalone web browser from mozilla.org with openSuSE patches and SafeBrowsing enabled"
 arch=('i686' 'x86_64')
@@ -32,7 +32,7 @@ source=(https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/$pkgver/source/
         kde.js
         mozilla-kde.patch
         mozilla-nongnome-proxies.patch)
-md5sums=('f50ca7656eec47030b396f39075fa980'
+md5sums=('82deadb501c7fc0e9fa6b025f51f05a1'
          '591d7173a7f5bc0ee01124fca80f3782'
          'bdeb0380c7fae30dd0ead6d2d3bc5873'
          '594523c536a9be951b52c90dd85aff18'
