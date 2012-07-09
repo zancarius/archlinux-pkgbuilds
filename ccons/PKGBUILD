@@ -1,4 +1,6 @@
 # Maintainer: Benjamin A. Shelton <zancarius@gmail.com>
+# Source: https://github.com/zancarius/archlinux-pkgbuilds
+
 pkgname=ccons
 pkgver=230
 pkgrel=1
@@ -8,7 +10,7 @@ url="http://code.google.com/p/ccons/"
 license=('MIT')
 source=(build-fix.patch)
 depends=('libedit')
-makedepends=('cmake')
+makedepends=('clang' 'cmake' 'gcc' 'llvm' 'subversion')
 options=(!buildflags)
 md5sums=('9030c2b2f38041f77c9d9b52ef056721')
 
