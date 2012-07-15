@@ -5,6 +5,7 @@ pkgver=1.5
 pkgrel=1
 pkgdesc="The GNU Miscfiles collection. Includes the Webster's Second International English wordlist and appendix English wordlist."
 arch=(any)
+url="http://www.gnu.org/software/miscfiles/"
 license=(GPL)
 depends=(util-linux)
 install=${pkgname}.install
