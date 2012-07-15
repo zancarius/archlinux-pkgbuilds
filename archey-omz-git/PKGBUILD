@@ -1,6 +1,6 @@
 # Maintainer: Benjamin A. Shelton <zancarius@gmail.com>
 # Source: https://github.com/zancarius/archlinux-pkgbuilds
-pkgname=archey-omz
+pkgname=archey-omz-git
 pkgver=20120715
 pkgrel=1
 pkgdesc="archeydevil's fork of the excellent oh-my-zsh package."
