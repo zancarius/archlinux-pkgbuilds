@@ -1,0 +1,45 @@
+# Maintainer: Benjamin A. Shelton <zancarius@gmail.com>
+# Source: https://github.com/zancarius/archlinux-pkgbuilds
+pkgname=archey-omz
+pkgver=20120715
+pkgrel=1
+pkgdesc="archeydevil's fork of the excellent oh-my-zsh package."
+arch=(any)
+url="https://github.com/archeydevil/oh-my-zsh"
+license=(BSD)
+depends=(zsh)
+source=()
+md5sums=()
+
+_gitroot="https://github.com/archeydevil/oh-my-zsh.git"
+_gitname="oh-my-zsh"
+
+build () {
+    
+    cd "${srcdir}"
+    
+    if [ -d "${_gitname}/.git" ] ; then
+        msg "Updating git repository..."
+        (cd "${_gitname}" && git pull)
+    else
+        msg "Cloning git repository..."
+        git clone ${_gitroot} ${_gitname}
+    fi
+}
+
+package () {
+
+    install -d "${pkgdir}/usr/share/oh-my-zsh"
+    install -d "${pkgdir}/usr/share/zsh/site-functions"
+    install -Dm0644 "${srcdir}/${_gitname}/omz" "${pkgdir}/usr/share/zsh/site-functions/omz"
+    install -Dm0644 "${srcdir}/${_gitname}/LICENSE" "${pkgdir}/usr/share/licenses/archey-omz/LICENSE"
+    install -Dm0644 "${srcdir}/${_gitname}/NOTICE" "${pkgdir}/usr/share/oh-my-zsh/NOTICE"
+    install -Dm0644 "${srcdir}/${_gitname}/README.md" "${pkgdir}/usr/share/oh-my-zsh/README.md"
+
+    cp -a "${srcdir}/${_gitname}/lib" "${pkgdir}/usr/share/oh-my-zsh"    
+    cp -a "${srcdir}/${_gitname}/plugins" "${pkgdir}/usr/share/oh-my-zsh"    
+    cp -a "${srcdir}/${_gitname}/templates" "${pkgdir}/usr/share/oh-my-zsh"    
+    cp -a "${srcdir}/${_gitname}/themes" "${pkgdir}/usr/share/oh-my-zsh"    
+
+
+}
