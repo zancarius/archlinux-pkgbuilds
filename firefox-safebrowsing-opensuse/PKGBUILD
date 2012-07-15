@@ -6,7 +6,7 @@
 
 pkgname=firefox-safebrowsing-opensuse
 pkgver=13.0.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Standalone web browser from mozilla.org with openSuSE patches and SafeBrowsing enabled"
 arch=('i686' 'x86_64')
 license=('MPL' 'GPL' 'LGPL')
@@ -16,7 +16,7 @@ depends=('gtk2' 'mozilla-common' 'libxt' 'startup-notification' 'mime-types' 'db
 makedepends=('unzip' 'zip' 'diffutils' 'python2' 'wireless_tools' 'yasm' 'mesa'
              'autoconf2.13' 'libidl2' 'xorg-server-xvfb' 'imake' 'gcc')
 optdepends=('wireless_tools: Location detection via available WiFi networks')
-provides=('firefox')
+provides=('firefox=13.0.1')
 conflicts=('firefox')
 url="http://www.mozilla.org/projects/firefox"
 install=firefox.install
