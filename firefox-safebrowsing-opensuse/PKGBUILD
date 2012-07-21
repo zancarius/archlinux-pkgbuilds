@@ -1,12 +1,12 @@
 # Maintainer: Benjamin A. Shelton <zancarius@gmail.com>
 # Based off the official Arch Linux package build by
 # Ionut Biru <ibiru@archlinux.org> and Jakub Schmidtke <sjakub@gmail.com>
-# with minor additions from firefox-kde-opensus PKGBUILD by
+# with additions and patches from firefox-kde-opensuse PKGBUILD by
 # Weng Xuetian <wengxt@gmail.com>.
 
 pkgname=firefox-safebrowsing-opensuse
-pkgver=13.0.1
-pkgrel=2
+pkgver=14.0.1
+pkgrel=1
 pkgdesc="Standalone web browser from mozilla.org with openSuSE patches and SafeBrowsing enabled"
 arch=('i686' 'x86_64')
 license=('MPL' 'GPL' 'LGPL')
@@ -21,42 +21,53 @@ conflicts=('firefox')
 url="http://www.mozilla.org/projects/firefox"
 install=firefox.install
 options=(!emptydirs)
-source=(https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/$pkgver/source/firefox-$pkgver.source.tar.bz2
+source=(
+        https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/$pkgver/source/firefox-$pkgver.source.tar.bz2
         mozconfig
         firefox.desktop
         firefox-install-dir.patch
         vendor.js
         firefox-browser-css.patch
-        firefox-cross-desktop.patch
         firefox-kde.patch
         kde.js
         mozilla-kde.patch
-        mozilla-nongnome-proxies.patch)
-md5sums=('82deadb501c7fc0e9fa6b025f51f05a1'
-         '591d7173a7f5bc0ee01124fca80f3782'
-         'bdeb0380c7fae30dd0ead6d2d3bc5873'
-         '594523c536a9be951b52c90dd85aff18'
-         '0d053487907de4376d67d8f499c5502b'
-         '90cc234d848a2060abc6a007622e1af7'
-         '6e7b4f2554beacb998bbce3f0e184584'
-         'ea852561bc568922b25548c8d5367aee'
-         '75df0f88cc7a7fa7d522459e4ff82cc5'
-         '4ab126609ed4362c298b5c59aa3d25c7'
-         '8b0ecfdf697485d7b7dd26291c0dc478')
+        mozilla-nongnome-proxies.patch
+        shared-libs.patch
+)
+md5sums=(
+         'c2f884f0f6c41c65cf20f678a1ee7191'  # Firefox tarball
+         '591d7173a7f5bc0ee01124fca80f3782'  # mozconfig
+         'bdeb0380c7fae30dd0ead6d2d3bc5873'  # firefox.desktop
+         '1e4bcac59e93d21fffa6a1d1ad235247'  # firefox-install-dir.patch
+         '0d053487907de4376d67d8f499c5502b'  # vendor.js
+         'b6fd821c02bde029a816ac043163dce0'  # firefox-browser-css.patch
+         '424cb9453b89615fae4307e2b7b6942a'  # firefox-kde.patch
+         '75df0f88cc7a7fa7d522459e4ff82cc5'  # kde.js
+         '24ba4b7635ed12786fc1f2febf44d017'  # mozilla-kde.patch
+         '8b0ecfdf697485d7b7dd26291c0dc478'  # mozilla-nongnome-proxies.patch
+         '52e52f840a49eb1d14be1c0065b03a93'  # shared-libs.patch
+)
 
 build() {
   cd mozilla-release
 
   cp ../mozconfig .mozconfig
   install -m 644 "${srcdir}/kde.js" browser/app/profile/kde.js
-  
+
+  msg "Applying firefox-install-dir.patch"  
   patch -Np1 -i ../firefox-install-dir.patch
-  
+  msg "Applying mozilla-nongnome-proxies.patch"  
   patch -Np1 -i ../mozilla-nongnome-proxies.patch
+  msg "Applying mozilla-kde.patch"  
   patch -Np1 -i ../mozilla-kde.patch
-  patch -Np1 -i ../firefox-cross-desktop.patch
+#  msg "Applying firefox-cross-desktop.patch"  
+#  patch -Np1 -i ../firefox-cross-desktop.patch
+  msg "Applying firefox-kde.patch"  
   patch -Np1 -i ../firefox-kde.patch
+  msg "Applying firefox-browser-css.patch"  
   patch -Np1 -i ../firefox-browser-css.patch
+  msg "Applying shared-libs.patch"  
+  patch -Np1 -i ../shared-libs.patch
 
   # Fix PRE_RELEASE_SUFFIX
   sed -i '/^PRE_RELEASE_SUFFIX := ""/s/ ""//' \

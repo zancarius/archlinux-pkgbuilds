@@ -4,12 +4,12 @@ diff -Nur mozilla-release.orig/config/autoconf.mk.in mozilla-release/config/auto
 @@ -68,8 +68,8 @@
  mandir		= @mandir@
  idldir		= $(datadir)/idl/$(MOZ_APP_NAME)-$(MOZ_APP_VERSION)
- 
+
 -installdir	= $(libdir)/$(MOZ_APP_NAME)-$(MOZ_APP_VERSION)
 -sdkdir		= $(libdir)/$(MOZ_APP_NAME)-devel-$(MOZ_APP_VERSION)
 +installdir	= $(libdir)/$(MOZ_APP_NAME)
 +sdkdir		= $(libdir)/$(MOZ_APP_NAME)-devel
- 
+
  DIST		= $(DEPTH)/dist
  LIBXUL_SDK      = @LIBXUL_SDK@
 diff -Nur mozilla-release.orig/js/src/config/autoconf.mk.in mozilla-release/js/src/config/autoconf.mk.in
@@ -18,11 +18,11 @@ diff -Nur mozilla-release.orig/js/src/config/autoconf.mk.in mozilla-release/js/s
 @@ -61,8 +61,8 @@
  datadir		= @datadir@
  mandir		= @mandir@
- 
+
 -installdir	= $(libdir)/$(MOZ_APP_NAME)-$(MOZ_APP_VERSION)
 -sdkdir		= $(libdir)/$(MOZ_APP_NAME)-devel-$(MOZ_APP_VERSION)
 +installdir	= $(libdir)/$(MOZ_APP_NAME)
 +sdkdir		= $(libdir)/$(MOZ_APP_NAME)-devel
- 
+
  TOP_DIST	= @TOP_DIST@
  ifneq (,$(filter /%,$(TOP_DIST)))
