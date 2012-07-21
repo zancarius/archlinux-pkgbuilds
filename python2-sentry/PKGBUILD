@@ -3,7 +3,7 @@
 pkgname=python2-sentry
 pkgver=4.8.1
 pkgrel=1
-pkgdesc="Python based realtime logging and aggregation server."
+pkgdesc="Python-based realtime logging and aggregation server."
 arch=(any)
 url="http://pypi.python.org/pypi/sentry"
 license=(MIT)
