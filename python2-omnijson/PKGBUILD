@@ -1,0 +1,45 @@
+# Maintainer: Benjamin A. Shelton <zancarius@gmail.com>
+# Source: https://github.com/zancarius/archlinux-pkgbuilds
+pkgname=python2-omnijson
+pkgver=20120721
+pkgrel=1
+pkgdesc="Selects the best installed JSON implementation available to Python."
+arch=(any)
+url="http://pypi.python.org/pypi/omnijson"
+license=(MIT)
+depends=(python2-omnijson python2-decorator)
+makedepends=(python2-pip)
+source=()
+md5sums=()
+
+_pipname=omnijson
+
+build () {
+    
+    cd "${srcdir}"
+
+    _srccache="${srcdir}"
+    
+    if [ -n "${SRCDEST}" -a -w "${SRCDEST}" ] ; then
+        msg "SRCDEST set and writable"
+        if [ ! -d "${SRCDEST}/pip" ] ; then
+            msg "Making dir ${SRCDEST}/pip"
+            mkdir "${SRCDEST}/pip" || return 1
+        fi
+        
+        if [ -w "${SRCDEST}/pip" ] ; then
+            msg "Using ${SRCDEST}/pip"
+            _srccache="${SRCDEST}/pip"
+        fi
+    fi
+
+    msg "Installing via PIP with cache dir ${_srccache}..."
+    pip2 install omnijson --download-cache="${_srccache}" --build="${srcdir}/" --install-option="--prefix=${pkgdir}/usr"
+    
+}
+
+package () {
+
+    install -Dm0664 "${srcdir}/${_pipname}/LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+
+}
