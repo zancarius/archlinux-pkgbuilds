@@ -179,3 +179,5 @@ Sentry is a real time logging service and is required by httpbin
 in order to function. This is the latest official build of Sentry
 available from the Python Package Index (PyPI) and is written by
 the same author as `python2-raven`.
+
+**This package is available in the AUR.**
