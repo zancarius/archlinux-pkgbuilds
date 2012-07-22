@@ -1,0 +1,34 @@
+# Maintainer: Benjamin A. Shelton <zancarius@gmail.com>
+# Source: https://github.com/zancarius/archlinux-pkgbuilds
+pkgname=python2-raven-git
+pkgver=20120721
+pkgrel=1
+pkgdesc="Python client for Sentry."
+arch=(any)
+url="https://github.com/dcramer/raven"
+license=(BSD)
+depends=(python2-sentry)
+provides=(python2-raven)
+source=()
+md5sums=()
+
+_gitroot="https://github.com/dcramer/raven.git"
+_gitname="raven"
+
+build () {
+    
+    cd "${srcdir}"
+    
+    if [ -d "${_gitname}/.git" ] ; then
+        msg "Updating git repository..."
+        (cd "${_gitname}" && git pull)
+    else
+        msg "Cloning git repository..."
+        git clone ${_gitroot} ${_gitname}
+    fi
+    
+    cd "${_gitname}"
+
+    python2 setup.py install --root="${pkgdir}/"
+    
+}
