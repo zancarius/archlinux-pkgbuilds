@@ -16,7 +16,7 @@ depends=('gtk2' 'mozilla-common' 'libxt' 'startup-notification' 'mime-types' 'db
 makedepends=('unzip' 'zip' 'diffutils' 'python2' 'wireless_tools' 'yasm' 'mesa'
              'autoconf2.13' 'libidl2' 'xorg-server-xvfb' 'imake' 'gcc')
 optdepends=('wireless_tools: Location detection via available WiFi networks')
-provides=('firefox=13.0.1')
+provides=('firefox=14.0.1')
 conflicts=('firefox')
 url="http://www.mozilla.org/projects/firefox"
 install=firefox.install
@@ -60,8 +60,6 @@ build() {
   patch -Np1 -i ../mozilla-nongnome-proxies.patch
   msg "Applying mozilla-kde.patch"  
   patch -Np1 -i ../mozilla-kde.patch
-#  msg "Applying firefox-cross-desktop.patch"  
-#  patch -Np1 -i ../firefox-cross-desktop.patch
   msg "Applying firefox-kde.patch"  
   patch -Np1 -i ../firefox-kde.patch
   msg "Applying firefox-browser-css.patch"  
@@ -72,9 +70,6 @@ build() {
   # Fix PRE_RELEASE_SUFFIX
   sed -i '/^PRE_RELEASE_SUFFIX := ""/s/ ""//' \
     browser/base/Makefile.in
-
-  #export CC=gcc-4.6
-  #export CXX=g++-4.6
 
   export LDFLAGS="$LDFLAGS -Wl,-rpath,/usr/lib/firefox"
   export PYTHON="/usr/bin/python2"
