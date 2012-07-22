@@ -24,20 +24,70 @@ Be aware that the mirror selection logic in the
 `java-commons-full-scriptmirror` may cause `makepkg` to fail unexpectedly.
 I haven't yet resolved this issue and am open to ideas. :)
 
-## GNU Miscfiles
+## archey-omz-git
 
-The GNU Miscfiles (`miscfiles`) PKGBUILD provides all the databaes and other
-assorted bits and pieces that are part of the standard Miscfiles
-distribution, including the Webster's Second Internation English word list
-and its appendix. If you find that the official `community/words` package
-isn't quite up to par and are more accustomed to the words list that ships
-with Gentoo, you should consider installing this one. A symlink to
-`/usr/share/dict/web2` will be created as `/usr/share/dict/words` if and
-only if the `words` symlink does not already exist; care is taken to avoid
-conflicts with the `community/words` package. Everything else in the
-Miscfiles distribution is installed in `/usr/share/miscfiles`.
+`archey-omz-git` is a PKGBUILD for archydevil's [oh-my-zsh fork](https://github.com/archeydevil/oh-my-zsh)
+for Arch Linux. His original AUR package, `oh-my-zsh`, mysteriously vanished
+around the latter part of April 2012 when he submitted a
+[removal request](http://mailman.archlinux.org/pipermail/aur-general/2012-April/018702.html).
+His planned changes thusfar have never made it back into the AUR for
+reasons unknown. Until they do, this repo will be made available for
+anyone who deeply appreciated his work.
 
-## Gimp 2.6.x
+## babl-016
+
+`babl-016` is one of two required builds for GIMP v2.6. Specifically, GIMP
+requires this version of babl in order to function. If you're planning
+on using GIMP 2.6, you'll need to build this.
+
+## bsdmainutils
+
+`bsdmainutils` is a PKGBUILD for Ubuntu's package of the same name. I happen
+to use this package from the AUR and noticed one day that it had been
+abandoned by its maintainer. I have since adopted it and will continue to
+maintain the AUR package for the foreseeable future.
+
+**This package is available in the AUR.**
+
+## ccons
+
+Some time ago, I was looking around for a C-style REPL and stumbled upon
+`ccons` in the AUR and took note that it had been abandoned. I believe the
+package was left as an orphan primarily because upstream's development
+progress is somewhat slow and the repository is occasionally left in an
+unbuildable state.
+
+This PKGBUILD of ccons includes a series of patches to fix the build
+process. It's not guaranteed to continue working, but I'll try to maintain
+this as best as I can.
+
+**This package is available in the AUR.**
+
+## firefox-safebrowsing-opensuse
+
+Some time ago, the official Firefox package dropped safebrowsing support.
+I've since readded it to the mozconfig and have included all of the OpenSUSE
+patches from `firefox-kde-opensuse`, maintained by Weng Xuetian, along with
+a few other improvements (for instance, jemalloc is enabled by default).
+
+If you don't have xulrunner installed or have Eclipse installed, you may
+find that you can't build this package. Unfortunately, there's not much
+I can suggest beyond [building it in a chroot](https://wiki.archlinux.org/index.php/DeveloperWiki:Building_in_a_Clean_Chroot).
+Don't worry, building from a chroot is easy--it's just somewhat
+inconvenient. You also shouldn't have to downgrade your glibc or apply
+glibc-related patches to get it to build.
+
+## gegl-018
+
+`gegl-018` exists for the same reason babl-016 does--to support gimp-26.
+This specific version of gegl is *also* required to build gimp-26, so you'll
+need to remove any existing versions from your system (there should be
+a conflicts in the PKGBUILD). This package, along with babl-016, will
+be maintained for as long as I can maintain gimp-26 or until GIMP 2.8
+has improved sufficiently that I've decided to switch to it, whichever
+causes me to terminate support first.
+
+## gimp-26
 
 The `gimp-26` PKGBUILDs are provided as a temporary stopgap for issues
 related to sub-pixel hinting and the behavior of Gimp's text tool. For
@@ -54,3 +104,78 @@ and Gegl 0.1.8. If you'd rather do the work yourself, you'll need to
 checkout and update the Gimp, Babl, and Gegl repositories from the [Arch
 Linux SVN Repositories](http://www.archlinux.org/svn/) (**important**:
 read the warnings there first!), specifically revision r148734.
+
+## java-commons-full-scriptmirror
+
+This PKGBUILD was originally developed as a test to randomly pick from
+a selection of known mirrors for the Apache Commons collection. Because
+of the amount of selection logic in the PKGBUILD, this will never be
+a candidate for submission to the AUR. Instead, this is a convenience
+script for those of you who might want to be polite stewards of the
+Internet and refuse to leech bandwidth from a single mirror.
+
+## java-commons-full
+
+`java-commons-full` is identical to `java-commons-full-scriptmirror`
+with the notable exception that its selection of source servers are
+pre-generated from a known list using an external Pythoon script.
+Otherwise, `java-commons-full` is the full collection of Apache Commons
+(where applicable and available) and is provided as a convenience over
+manually installing every Commons package by hand.
+
+## miscfiles
+
+This is the GNU Miscfiles (`miscfiles`) PKGBUILD. It provides all of the
+databaes and other assorted bits and pieces that are part of the standard
+Miscfiles distribution, including the Webster's Second Internation English
+word list and its appendix. If you find that the official `community/words`
+package isn't quite up to par and are more accustomed to the words list
+that ships with Gentoo, you should consider installing this one. A symlink
+to `/usr/share/dict/web2` will be created as `/usr/share/dict/words` if and
+only if the `words` symlink does not already exist; care is taken to avoid
+conflicts with the `community/words` package. Everything else in the
+Miscfiles distribution is installed in `/usr/share/miscfiles`.
+
+**This package is available in the AUR.**
+
+## python2-httpbin-git
+
+This is a PKGBUILD supplying [Kenneth Reitz](https://github.com/kennethreitz)'
+httpbin HTTP server. httpbin is useful for running HTTP client unit tests
+against and supports much of the basic grammar in HTTP 1.1.
+
+Be warned that this package will pull in quite a large number of
+dependencies.
+
+**This package is available in the AUR.**
+
+## python2-omnijson
+
+`python2-omnijson` serves as a simple wrapper for a large number of
+Python JSON implementations and is a convenience project for installations
+that may vary in what they support. This PKGBUILD pulls `python2-omnijson`
+from the Python Package Index (PyPI).
+
+**This package is available in the AUR.**
+
+## python2-raven-git
+
+Raven is a frontend to Sentry, which is a real time logging service.
+httpbin requires Raven; this is the Git version of the package and
+is written by [David Cramer](https://github.com/dcramer).
+
+## python2-raven
+
+Raven is a frontend to Sentry, which is a real time logging service.
+httpbin requires Raven; this is the latest official build of Raven
+available from the Python Package Index (PyPI) and is written by
+the same author as `python2-raven-git`.
+
+**This package is availble in the AUR.**
+
+## python2-sentry
+
+Sentry is a real time logging service and is required by httpbin
+in order to function. This is the latest official build of Sentry
+available from the Python Package Index (PyPI) and is written by
+the same author as `python2-raven`.
