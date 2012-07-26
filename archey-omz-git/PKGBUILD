@@ -7,6 +7,7 @@ pkgdesc="archeydevil's fork of the excellent oh-my-zsh package."
 arch=(any)
 url="https://github.com/archeydevil/oh-my-zsh"
 license=(BSD)
+conflicts=(oh-my-zsh-git)
 depends=(zsh)
 makedepends=(git)
 source=()
