@@ -1,8 +1,8 @@
 # Maintainer: Benjamin A. Shelton <zancarius@gmail.com>
 # Source: https://github.com/zancarius/archlinux-pkgbuilds
 pkgname=python2-raven-git
-pkgver=20120721
-pkgrel=2
+pkgver=20120725
+pkgrel=1
 pkgdesc="Python client for Sentry."
 arch=(any)
 url="https://github.com/dcramer/raven"
