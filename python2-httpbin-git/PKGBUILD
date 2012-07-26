@@ -24,7 +24,7 @@ build () {
         (cd "${_gitname}" && git pull)
     else
         msg "Cloning git repository..."
-        git clone ${_gitroot} ${_gitname}
+        git clone --depth=1 ${_gitroot} ${_gitname}
     fi
     
     cd "${_gitname}"
