@@ -2,12 +2,13 @@
 # Source: https://github.com/zancarius/archlinux-pkgbuilds
 pkgname=archey-omz-git
 pkgver=20120715
-pkgrel=1
+pkgrel=2
 pkgdesc="archeydevil's fork of the excellent oh-my-zsh package."
 arch=(any)
 url="https://github.com/archeydevil/oh-my-zsh"
 license=(BSD)
 depends=(zsh)
+makedepends=(git)
 source=()
 md5sums=()
 

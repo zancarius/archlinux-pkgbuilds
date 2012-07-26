@@ -2,12 +2,13 @@
 # Source: https://github.com/zancarius/archlinux-pkgbuilds
 pkgname=python2-raven-git
 pkgver=20120721
-pkgrel=1
+pkgrel=2
 pkgdesc="Python client for Sentry."
 arch=(any)
 url="https://github.com/dcramer/raven"
 license=(BSD)
 depends=(python2-sentry)
+makedepends=(git)
 provides=(python2-raven)
 source=()
 md5sums=()
