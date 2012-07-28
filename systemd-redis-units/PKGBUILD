@@ -1,5 +1,10 @@
 # Maintainer: Benjamin A. Shelton <zancarius@gmail.com>
-# Based on https://bbs.archlinux.org/viewtopic.php?id=135922
+# Source: https://github.com/zancarius/archlinux-pkgbuilds
+#
+# Based partially on https://bbs.archlinux.org/viewtopic.php?id=135922
+# and ntpd.service.
+#
+# When submitting fixes, Github pull requests are preferred.
 pkgname=systemd-redis-units
 pkgver=0.1
 pkgrel=1
