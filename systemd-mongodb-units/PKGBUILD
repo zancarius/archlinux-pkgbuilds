@@ -2,6 +2,8 @@
 # Source: https://github.com/zancarius/archlinux-pkgbuilds
 #
 # When submitting fixes, Github pull requests are preferred.
+#
+# Warning: Shard support (mongos) is not currently included.
 pkgname=systemd-mongodb-units
 pkgver=0.1
 pkgrel=1
