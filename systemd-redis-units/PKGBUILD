@@ -7,7 +7,7 @@
 # When submitting fixes, Github pull requests are preferred.
 pkgname=systemd-redis-units
 pkgver=0.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Redis service for systemd"
 arch=('any')
 url="http://www.freedesktop.org/wiki/Software/systemd"
