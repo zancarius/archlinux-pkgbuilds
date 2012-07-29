@@ -3,7 +3,6 @@ Description=Redis
 After=network.target
 
 [Service]
-Type=forking
 ExecStart=/usr/bin/redis-server /etc/redis.conf
 Restart=always
 
