@@ -19,7 +19,7 @@ source=(
 	systemd-redis-units.install
 )
 md5sums=(
-    cab515ad1b66c459d6f1e660140af827
+    225a745d08dedbebbeb1546d09a42252
     3db5f790ddd1fc7d83afe94da5075309
 )
 package() {
