@@ -4,6 +4,7 @@ After=network.target
 
 [Service]
 User=mongodb
+Group=daemon
 ExecStart=/usr/bin/mongod --config /etc/mongodb.conf
 
 [Install]
