@@ -1,0 +1,26 @@
+post_install() {
+cat << EOF
+
+==> Remove any lircd entries in rc.conf
+
+==> To start lircd use this commands as root :
+	systemctl start lircd.service
+
+==> To enable it on boot :
+	systemctl enable lircd.service
+
+==> If memcached doesn't start, reload systemd with this command :
+	systemctl --system daemon-reload
+
+When using an older MCE remote or a remote that doesn't appear to be
+correctly working, uncomment the line:
+
+w /sys/class/rc/rc0/protocols - - - - lirc
+
+from /etc/tmpfiles.d/lircd-remotes.conf
+
+EOF
+}
+post_upgrade() {
+	post_install
+}

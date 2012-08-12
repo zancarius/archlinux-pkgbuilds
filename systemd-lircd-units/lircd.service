@@ -1,0 +1,11 @@
+[Unit]
+Description=LIRC Service
+Wants=lircd-socket.service
+
+[Service]
+EnvironmentFile=/etc/conf.d/lircd.conf
+ExecStart=/usr/sbin/lircd -n -d $LIRC_DEVICE $LIRC_EXTRAOPTS $LIRC_CONFIGFILE
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
