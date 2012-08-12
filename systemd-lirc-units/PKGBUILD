@@ -2,7 +2,7 @@
 # Source: https://github.com/zancarius/archlinux-pkgbuilds
 #
 # When submitting fixes, Github pull requests are preferred.
-pkgname=systemd-lircd-units
+pkgname=systemd-lirc-units
 pkgver=0.1
 pkgrel=1
 pkgdesc="lircd units for systemd"
@@ -16,7 +16,7 @@ source=(
     lircd-remotes.conf
     lircd.service
     lircd-socket.service
-    systemd-lircd-units.install
+    systemd-lirc-units.install
 )
 md5sums=(
     10d0725a5e268b3584940be90dbe1103
