@@ -16,14 +16,17 @@ depends=('redis' 'systemd')
 install=$pkgname.install
 source=(
     redis.service
+    redis.conf
 	systemd-redis-units.install
 )
 md5sums=(
     9068cb3930a47ff5e0a9261a009d2e9f
-    bdbf2c1fb3fab23f08c231848d36ca71
+    d363b323553a3578b27f099109aa6d42
+    a5ab075d19a6902cef6f854df2d0571e
 )
 package() {
-  install -Dm644 "${srcdir}/redis.service" "${pkgdir}/etc/systemd/system/redis.service"
+    install -Dm644 "${srcdir}/redis.conf"   "${pkgdir}/etc/tmpfiles.d/redis.conf"
+    install -Dm644 "${srcdir}/redis.service" "${pkgdir}/etc/systemd/system/redis.service"
 }
 
 

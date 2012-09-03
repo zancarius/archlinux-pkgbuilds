@@ -31,9 +31,16 @@ EOF
 post_install() {
     _alert
     useradd -r -g daemon -d /var/lib/redis -s /bin/bash redis
-    chown -R redis:daemon /var/lib/redis
-    chmod 0750 /var/lib/redis
-    chmod -R 0640 /var/lib/redis/*
+
+    if [ -d /var/lib/redis ] ; then
+        chown -R redis:daemon /var/lib/redis
+        chmod 0750 /var/lib/redis
+        chmod -R 0640 /var/lib/redis/*
+    fi
+    
+    if [ -e /var/log/redis.log ] ; then
+        chown redis:daemon /var/log/redis.log*
+    fi
 }
 post_upgrade() {
     _alert
@@ -45,5 +52,9 @@ pre_remove() {
         chown -R root:root /var/lib/redis
         chmod 0755 /var/lib/redis
         chmod -R 0644 /var/lib/redis/*
+    fi
+    
+    if [ -e /var/log/redis.log ] ; then
+        chown root:root /var/log/redis.log*
     fi
 }
