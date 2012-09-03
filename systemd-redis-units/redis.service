@@ -3,6 +3,9 @@ Description=Redis Server
 After=network.target
 
 [Service]
+Type=simple
+User=redis
+Group=daemon
 ExecStart=/usr/bin/redis-server /etc/redis.conf
 Restart=always
 

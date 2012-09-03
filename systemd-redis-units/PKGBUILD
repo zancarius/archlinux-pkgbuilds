@@ -6,9 +6,9 @@
 #
 # When submitting fixes, Github pull requests are preferred.
 pkgname=systemd-redis-units
-pkgver=0.1
-pkgrel=2
-pkgdesc="Redis service for systemd"
+pkgver=0.2
+pkgrel=1
+pkgdesc="Redis service for systemd--this package masks the unit supplied with redis from [community]"
 arch=('any')
 url="http://www.freedesktop.org/wiki/Software/systemd"
 license=('GPL')
@@ -19,11 +19,11 @@ source=(
 	systemd-redis-units.install
 )
 md5sums=(
-    225a745d08dedbebbeb1546d09a42252
-    3db5f790ddd1fc7d83afe94da5075309
+    9068cb3930a47ff5e0a9261a009d2e9f
+    bdbf2c1fb3fab23f08c231848d36ca71
 )
 package() {
-  install -Dm644 "${srcdir}/redis.service" "${pkgdir}/usr/lib/systemd/system/redis.service"
+  install -Dm644 "${srcdir}/redis.service" "${pkgdir}/etc/systemd/system/redis.service"
 }
 
 
