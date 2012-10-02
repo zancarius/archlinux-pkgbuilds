@@ -9,6 +9,9 @@ url="http://pypi.python.org/pypi/raven"
 license=(BSD)
 depends=(python2)
 makedepends=(python2-distribute)
+optdepends=(
+    'python2-sentry: running local Sentry instance'
+)
 source=("http://pypi.python.org/packages/source/r/raven/raven-${pkgver}.tar.gz")
 md5sums=(eb25dd9b76afcef9edf977b68be99c67)
 
