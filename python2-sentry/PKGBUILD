@@ -3,7 +3,7 @@
 
 pkgname=python2-sentry
 pkgver=5.0.13
-pkgrel=3
+pkgrel=4
 pkgdesc="Python-based realtime logging and aggregation server."
 arch=(any)
 url="http://pypi.python.org/pypi/sentry"
@@ -30,7 +30,7 @@ depends=(
     'python2-oauth2>=1.5.167'
     'python2-openid>=2.2'
     'python2-pynliner>=0.4.0'
-    'python-south>=0.7.6'
+    'python2-south>=0.7.6'
 )
 makedepends=(python2-distribute)
 source=("http://pypi.python.org/packages/source/s/sentry/sentry-${pkgver}.tar.gz")
