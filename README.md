@@ -24,6 +24,32 @@ Be aware that the mirror selection logic in the
 `java-commons-full-scriptmirror` may cause `makepkg` to fail unexpectedly.
 I haven't yet resolved this issue and am open to ideas. :)
 
+Below is a partial list and description of some of the packages. I'm currently
+deciding whether or not to truncate this list because it's becoming somewhat
+more noisome to maintain. Obviously, it was written at a time when my
+repository contained many fewer packages, but the total number has since
+grown as I've adopted and created a few more to support things I'm interested
+in or find myself using periodically (Sentry, for instance). Chances are,
+most of the packages you find here probably exist in the AUR, so any notes
+specifically pointing out this particular fact are mostly useless.
+
+## Updates
+
+If you see a package that's out of date and simply cannot wait for me to
+update the PKGBUILD, feel free to 1) flag it as out of date on the AUR in
+case I haven't noticed (or forgot) and (optionally) 2) send a pull request
+updating the outdated package(s). I try my best to check package versions
+at least once a week (usually on a Saturday evening), comparing them to their
+source repositories, and updating accordingly. Sometimes things fall through
+the cracks, so if I've overlooked something, a gentle nudge should fix it.
+
+As I sometimes (though rarely) add many packages in a single, large batch,
+there may be times when the original PKGBUILD contains an inaccuracy either
+in the project URL or the license. This is fairly rare as I try to catch
+mistakes made from copying template PKGBUILDs, but it does happen on occasion.
+Please don't feel offended if it does; it's probably an honest mistake that I
+happened to overlook, but don't hesitate to alert me.
+
 ## archey-omz-git
 
 `archey-omz-git` is a PKGBUILD for archydevil's [oh-my-zsh fork](https://github.com/archeydevil/oh-my-zsh)
