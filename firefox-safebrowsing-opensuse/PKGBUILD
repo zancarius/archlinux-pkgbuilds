@@ -5,7 +5,7 @@
 # Weng Xuetian <wengxt@gmail.com>.
 
 pkgname=firefox-safebrowsing-opensuse
-pkgver=14.0.1
+pkgver=15.0.1
 pkgrel=1
 pkgdesc="Standalone web browser from mozilla.org with openSuSE patches and SafeBrowsing enabled"
 arch=('i686' 'x86_64')
@@ -35,15 +35,15 @@ source=(
         shared-libs.patch
 )
 md5sums=(
-         'c2f884f0f6c41c65cf20f678a1ee7191'  # Firefox tarball
+         '743ba71fbce7b32023405db02d44143f'  # Firefox tarball
          '591d7173a7f5bc0ee01124fca80f3782'  # mozconfig
          'bdeb0380c7fae30dd0ead6d2d3bc5873'  # firefox.desktop
          '1e4bcac59e93d21fffa6a1d1ad235247'  # firefox-install-dir.patch
          '0d053487907de4376d67d8f499c5502b'  # vendor.js
          'b6fd821c02bde029a816ac043163dce0'  # firefox-browser-css.patch
-         '424cb9453b89615fae4307e2b7b6942a'  # firefox-kde.patch
+         '528852aec6eada56d29aae281a7d7c47'  # firefox-kde.patch
          '75df0f88cc7a7fa7d522459e4ff82cc5'  # kde.js
-         '24ba4b7635ed12786fc1f2febf44d017'  # mozilla-kde.patch
+         '64b4a718c8b6f7dce57ea89438234d42'  # mozilla-kde.patch
          '8b0ecfdf697485d7b7dd26291c0dc478'  # mozilla-nongnome-proxies.patch
          '52e52f840a49eb1d14be1c0065b03a93'  # shared-libs.patch
 )
