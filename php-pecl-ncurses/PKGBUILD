@@ -7,7 +7,7 @@ pkgrel=1
 pkgdesc="PHP ncurses terminal screen control."
 arch=(any)
 url="http://pecl.php.net/package/ncurses"
-license=(Apache)
+license=(PHP)
 backup=('etc/php/conf.d/ncurses.ini')
 depends=('php>=5.3')
 install="${pkgname}.install"
