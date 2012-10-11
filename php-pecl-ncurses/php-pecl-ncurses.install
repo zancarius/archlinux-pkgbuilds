@@ -1,0 +1,13 @@
+post_install() {
+
+    cat << EOF
+    ==> PHP extension
+
+    A config file was stored under /etc/php/conf.d/. In order to use this
+    extension make sure to uncomment it from its config file.
+    EOF
+}
+
+post_upgrade() {
+    post_install $1
+}
