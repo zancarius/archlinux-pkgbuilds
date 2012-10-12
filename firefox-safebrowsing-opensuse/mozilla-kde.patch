@@ -232,39 +232,39 @@ diff --git a/toolkit/content/jar.mn b/toolkit/content/jar.mn
 --- a/toolkit/content/jar.mn
 +++ b/toolkit/content/jar.mn
 @@ -45,29 +45,33 @@ toolkit.jar:
- *+ content/global/viewZoomOverlay.js          (viewZoomOverlay.js)
+    content/global/viewZoomOverlay.js          (viewZoomOverlay.js)
  *+ content/global/bindings/autocomplete.xml    (widgets/autocomplete.xml)
- *+ content/global/bindings/browser.xml         (widgets/browser.xml)
- *+ content/global/bindings/button.xml          (widgets/button.xml)
- *+ content/global/bindings/checkbox.xml        (widgets/checkbox.xml)
- *+ content/global/bindings/colorpicker.xml     (widgets/colorpicker.xml)
- *+ content/global/bindings/datetimepicker.xml  (widgets/datetimepicker.xml)
+    content/global/bindings/browser.xml         (widgets/browser.xml)
+    content/global/bindings/button.xml          (widgets/button.xml)
+    content/global/bindings/checkbox.xml        (widgets/checkbox.xml)
+    content/global/bindings/colorpicker.xml     (widgets/colorpicker.xml)
+    content/global/bindings/datetimepicker.xml  (widgets/datetimepicker.xml)
  *+ content/global/bindings/dialog.xml          (widgets/dialog.xml)
 +*+ content/global/bindings/dialog-kde.xml      (widgets/dialog-kde.xml)
 +% override chrome://global/content/bindings/dialog.xml chrome://global/content/bindings/dialog-kde.xml desktop=kde
- *+ content/global/bindings/editor.xml          (widgets/editor.xml)
- *  content/global/bindings/expander.xml        (widgets/expander.xml)
+    content/global/bindings/editor.xml          (widgets/editor.xml)
+    content/global/bindings/expander.xml        (widgets/expander.xml)
  *  content/global/bindings/filefield.xml       (widgets/filefield.xml)
  *+ content/global/bindings/findbar.xml         (widgets/findbar.xml)
- *+ content/global/bindings/general.xml         (widgets/general.xml)
- *+ content/global/bindings/groupbox.xml        (widgets/groupbox.xml)
+    content/global/bindings/general.xml         (widgets/general.xml)
+    content/global/bindings/groupbox.xml        (widgets/groupbox.xml)
  *+ content/global/bindings/listbox.xml         (widgets/listbox.xml)
- *+ content/global/bindings/menu.xml            (widgets/menu.xml)
- *+ content/global/bindings/menulist.xml        (widgets/menulist.xml)
- *+ content/global/bindings/notification.xml    (widgets/notification.xml)
- *+ content/global/bindings/numberbox.xml       (widgets/numberbox.xml)
- *+ content/global/bindings/popup.xml           (widgets/popup.xml)
+    content/global/bindings/menu.xml            (widgets/menu.xml)
+    content/global/bindings/menulist.xml        (widgets/menulist.xml)
+    content/global/bindings/notification.xml    (widgets/notification.xml)
+    content/global/bindings/numberbox.xml       (widgets/numberbox.xml)
+    content/global/bindings/popup.xml           (widgets/popup.xml)
  *+ content/global/bindings/preferences.xml     (widgets/preferences.xml)
 +*+ content/global/bindings/preferences-kde.xml (widgets/preferences-kde.xml)
 +% override chrome://global/content/bindings/preferences.xml chrome://global/content/bindings/preferences-kde.xml desktop=kde
- *+ content/global/bindings/progressmeter.xml   (widgets/progressmeter.xml)
- *+ content/global/bindings/radio.xml           (widgets/radio.xml)
- *+ content/global/bindings/resizer.xml         (widgets/resizer.xml)
- *+ content/global/bindings/richlistbox.xml     (widgets/richlistbox.xml)
- *+ content/global/bindings/scale.xml           (widgets/scale.xml)
- *+ content/global/bindings/scrollbar.xml       (widgets/scrollbar.xml)
- *+ content/global/bindings/scrollbox.xml       (widgets/scrollbox.xml)
- *+ content/global/bindings/splitter.xml        (widgets/splitter.xml)
+    content/global/bindings/progressmeter.xml   (widgets/progressmeter.xml)
+    content/global/bindings/radio.xml           (widgets/radio.xml)
+    content/global/bindings/resizer.xml         (widgets/resizer.xml)
+    content/global/bindings/richlistbox.xml     (widgets/richlistbox.xml)
+    content/global/bindings/scale.xml           (widgets/scale.xml)
+    content/global/bindings/scrollbar.xml       (widgets/scrollbar.xml)
+    content/global/bindings/scrollbox.xml       (widgets/scrollbox.xml)
+    content/global/bindings/splitter.xml        (widgets/splitter.xml)
 diff --git a/toolkit/content/widgets/dialog-kde.xml b/toolkit/content/widgets/dialog-kde.xml
 new file mode 100644
 --- /dev/null
@@ -3259,7 +3259,7 @@ diff --git a/widget/gtk2/nsFilePicker.cpp b/widget/gtk2/nsFilePicker.cpp
  #include "nsIFileURL.h"
  #include "nsIURI.h"
  #include "nsIWidget.h"
- #include "nsILocalFile.h"
+ #include "nsIFile.h"
  #include "nsIStringBundle.h"
  
  #include "nsArrayEnumerator.h"
@@ -3568,7 +3568,7 @@ diff --git a/widget/gtk2/nsFilePicker.h b/widget/gtk2/nsFilePicker.h
    nsTArray<nsCString> mFilterNames;
  
  private:
-   static nsILocalFile *mPrevDisplayDirectory;
+   static nsIFile *mPrevDisplayDirectory;
 +
 +  bool kdeRunning();
 +  bool getKdeRunning();
@@ -3755,7 +3755,7 @@ diff --git a/xpcom/io/nsLocalFileUnix.cpp b/xpcom/io/nsLocalFileUnix.cpp
  #include "nsISimpleEnumerator.h"
  #include "private/pprio.h"
  
- #ifdef MOZ_WIDGET_GTK2
+ #ifdef MOZ_WIDGET_GTK
  #include "nsIGIOService.h"
  #include "nsIGnomeVFSService.h"
 +#include "nsKDEUtils.h"
@@ -3775,7 +3775,7 @@ diff --git a/xpcom/io/nsLocalFileUnix.cpp b/xpcom/io/nsLocalFileUnix.cpp
  NS_IMETHODIMP
  nsLocalFile::Reveal()
  {
- #ifdef MOZ_WIDGET_GTK2
+ #ifdef MOZ_WIDGET_GTK
 -    nsCOMPtr<nsIGIOService> giovfs = do_GetService(NS_GIOSERVICE_CONTRACTID);
 -    nsCOMPtr<nsIGnomeVFSService> gnomevfs = do_GetService(NS_GNOMEVFSSERVICE_CONTRACTID);
 -    if (!giovfs && !gnomevfs)

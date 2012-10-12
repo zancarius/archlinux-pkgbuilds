@@ -5,7 +5,7 @@
 # Weng Xuetian <wengxt@gmail.com>.
 
 pkgname=firefox-safebrowsing-opensuse
-pkgver=15.0.1
+pkgver=16.0
 pkgrel=1
 pkgdesc="Standalone web browser from mozilla.org with openSuSE patches and SafeBrowsing enabled"
 arch=('i686' 'x86_64')
@@ -22,93 +22,93 @@ url="http://www.mozilla.org/projects/firefox"
 install=firefox.install
 options=(!emptydirs)
 source=(
-        https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/$pkgver/source/firefox-$pkgver.source.tar.bz2
-        mozconfig
-        firefox.desktop
-        firefox-install-dir.patch
-        vendor.js
-        firefox-browser-css.patch
-        firefox-kde.patch
-        kde.js
-        mozilla-kde.patch
-        mozilla-nongnome-proxies.patch
-        shared-libs.patch
+    https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/$pkgver/source/firefox-$pkgver.source.tar.bz2
+    mozconfig
+    firefox.desktop
+    firefox-install-dir.patch
+    vendor.js
+    firefox-browser-css.patch
+    firefox-kde.patch
+    kde.js
+    mozilla-kde.patch
+    mozilla-nongnome-proxies.patch
+    shared-libs.patch
 )
 md5sums=(
-         '743ba71fbce7b32023405db02d44143f'  # Firefox tarball
-         '591d7173a7f5bc0ee01124fca80f3782'  # mozconfig
-         'bdeb0380c7fae30dd0ead6d2d3bc5873'  # firefox.desktop
-         '1e4bcac59e93d21fffa6a1d1ad235247'  # firefox-install-dir.patch
-         '0d053487907de4376d67d8f499c5502b'  # vendor.js
-         'b6fd821c02bde029a816ac043163dce0'  # firefox-browser-css.patch
-         '528852aec6eada56d29aae281a7d7c47'  # firefox-kde.patch
-         '75df0f88cc7a7fa7d522459e4ff82cc5'  # kde.js
-         '64b4a718c8b6f7dce57ea89438234d42'  # mozilla-kde.patch
-         '8b0ecfdf697485d7b7dd26291c0dc478'  # mozilla-nongnome-proxies.patch
-         '52e52f840a49eb1d14be1c0065b03a93'  # shared-libs.patch
+    04cbefaebaf77693bacd11145ece104f # Firefox tarball
+    591d7173a7f5bc0ee01124fca80f3782 # mozconfig
+    bdeb0380c7fae30dd0ead6d2d3bc5873 # firefox.desktop
+    1e4bcac59e93d21fffa6a1d1ad235247 # firefox-install-dir.patch
+    0d053487907de4376d67d8f499c5502b # vendor.js
+    b6fd821c02bde029a816ac043163dce0 # firefox-browser-css.patch
+    e06cefa5df75c994da03ae07dc284ae0 # firefox-kde.patch
+    75df0f88cc7a7fa7d522459e4ff82cc5 # kde.js
+    7b938fbdd415dc373ef6b8acbcc38cfe # mozilla-kde.patch
+    8b0ecfdf697485d7b7dd26291c0dc478 # mozilla-nongnome-proxies.patch
+    52e52f840a49eb1d14be1c0065b03a93 # shared-libs.patch
 )
 
 build() {
-  cd mozilla-release
+    cd mozilla-release
 
-  cp ../mozconfig .mozconfig
-  install -m 644 "${srcdir}/kde.js" browser/app/profile/kde.js
+    cp ../mozconfig .mozconfig
+    install -m 644 "${srcdir}/kde.js" browser/app/profile/kde.js
 
-  msg "Applying firefox-install-dir.patch"  
-  patch -Np1 -i ../firefox-install-dir.patch
-  msg "Applying mozilla-nongnome-proxies.patch"  
-  patch -Np1 -i ../mozilla-nongnome-proxies.patch
-  msg "Applying mozilla-kde.patch"  
-  patch -Np1 -i ../mozilla-kde.patch
-  msg "Applying firefox-kde.patch"  
-  patch -Np1 -i ../firefox-kde.patch
-  msg "Applying firefox-browser-css.patch"  
-  patch -Np1 -i ../firefox-browser-css.patch
-  msg "Applying shared-libs.patch"  
-  patch -Np1 -i ../shared-libs.patch
+    #msg "Applying firefox-install-dir.patch"  
+    #patch -Np1 -i ../firefox-install-dir.patch
+    msg "Applying mozilla-nongnome-proxies.patch"  
+    patch -Np1 -i ../mozilla-nongnome-proxies.patch
+    msg "Applying mozilla-kde.patch"  
+    patch -Np1 -i ../mozilla-kde.patch
+    msg "Applying firefox-kde.patch"  
+    patch -Np1 -i ../firefox-kde.patch
+    msg "Applying firefox-browser-css.patch"  
+    patch -Np1 -i ../firefox-browser-css.patch
+    msg "Applying shared-libs.patch"  
+    patch -Np1 -i ../shared-libs.patch
 
-  # Fix PRE_RELEASE_SUFFIX
-  sed -i '/^PRE_RELEASE_SUFFIX := ""/s/ ""//' \
-    browser/base/Makefile.in
+    # Fix PRE_RELEASE_SUFFIX
+    sed -i '/^PRE_RELEASE_SUFFIX := ""/s/ ""//' \
+        browser/base/Makefile.in
 
-  export LDFLAGS="$LDFLAGS -Wl,-rpath,/usr/lib/firefox"
-  export PYTHON="/usr/bin/python2"
-  export MOZ_MAKE_FLAGS="$MAKEFLAGS"
-  unset MAKEFLAGS
+    export LDFLAGS="$LDFLAGS -Wl,-rpath,/usr/lib/firefox"
+    export PYTHON="/usr/bin/python2"
+    export MOZ_MAKE_FLAGS="$MAKEFLAGS"
+    unset MAKEFLAGS
 
-  # Enable PGO
-  export MOZ_PGO=1
-  export DISPLAY=:99
-  Xvfb -nolisten tcp -extension GLX -screen 0 1280x1024x24 $DISPLAY &
+    # Enable PGO
+    export MOZ_PGO=1
+    export DISPLAY=:99
+    Xvfb -nolisten tcp -extension GLX -screen 0 1280x1024x24 $DISPLAY &
 
-  make -f client.mk build
+    make -f client.mk build
 
-  kill $! || true
+    kill $! || true
 }
 
 package() {
-  cd mozilla-release
-  make -j1 -f client.mk DESTDIR="$pkgdir" install
+    cd mozilla-release
+    make -j1 -f client.mk DESTDIR="$pkgdir" install
 
-  install -m644 ../vendor.js "$pkgdir/usr/lib/firefox/defaults/pref"
+    install -m644 ../vendor.js "$pkgdir/usr/lib/firefox/defaults/pref"
 
-  for i in 16 22 24 32 48 256; do
-      install -Dm644 browser/branding/official/default$i.png \
-        "$pkgdir/usr/share/icons/hicolor/${i}x${i}/apps/firefox.png"
-  done
+    for i in 16 22 24 32 48 256; do
+        install -Dm644 browser/branding/official/default$i.png \
+            "$pkgdir/usr/share/icons/hicolor/${i}x${i}/apps/firefox.png"
+    done
 
-  install -Dm644 ../firefox.desktop \
-    "$pkgdir/usr/share/applications/firefox.desktop"
+    install -Dm644 ../firefox.desktop \
+        "$pkgdir/usr/share/applications/firefox.desktop"
 
-  # Use system-provided dictionaries
-  rm -rf "$pkgdir"/usr/lib/firefox/{dictionaries,hyphenation}
-  ln -s /usr/share/hunspell "$pkgdir/usr/lib/firefox/dictionaries"
-  ln -s /usr/share/hyphen "$pkgdir/usr/lib/firefox/hyphenation"
+    # Use system-provided dictionaries
+    rm -rf "$pkgdir"/usr/lib/firefox/{dictionaries,hyphenation}
+    ln -s /usr/share/hunspell "$pkgdir/usr/lib/firefox/dictionaries"
+    ln -s /usr/share/hyphen "$pkgdir/usr/lib/firefox/hyphenation"
 
-  # We don't want the development stuff
-  rm -r "$pkgdir"/usr/{include,lib/firefox-devel,share/idl}
+    # We don't want the development stuff
+    rm -r "$pkgdir"/usr/{include,lib/firefox-devel,share/idl}
 
-  #workaround for now
-  #https://bugzilla.mozilla.org/show_bug.cgi?id=658850
-  ln -sf firefox "$pkgdir/usr/lib/firefox/firefox-bin"
+    #workaround for now
+    #https://bugzilla.mozilla.org/show_bug.cgi?id=658850
+    ln -sf firefox "$pkgdir/usr/lib/firefox/firefox-bin"
 }

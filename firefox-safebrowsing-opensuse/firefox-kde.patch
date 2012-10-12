@@ -1167,13 +1167,13 @@ diff --git a/browser/components/build/nsModule.cpp b/browser/components/build/ns
 +#include "nsUnixShellService.h"
  #endif
  
- #if defined(XP_WIN) && !defined(__MINGW32__)
+ #if defined(XP_WIN)
  #include "nsIEHistoryEnumerator.h"
  #endif
  
  #include "rdf.h"
  #include "nsFeedSniffer.h"
-@@ -32,18 +32,16 @@ using namespace mozilla::browser;
+@@ -32,18 +32,16 @@
  
  /////////////////////////////////////////////////////////////////////////////
  
@@ -1186,13 +1186,13 @@ diff --git a/browser/components/build/nsModule.cpp b/browser/components/build/ns
 -NS_GENERIC_FACTORY_CONSTRUCTOR_INIT(nsGNOMEShellService, Init)
  #endif
  
- #if defined(XP_WIN) && !defined(__MINGW32__)
+ #if defined(XP_WIN)
  NS_GENERIC_FACTORY_CONSTRUCTOR(nsIEHistoryEnumerator)
  #endif
  
  NS_GENERIC_FACTORY_CONSTRUCTOR(nsFeedSniffer)
  
-@@ -64,17 +62,17 @@ NS_DEFINE_NAMED_CID(NS_SHELLSERVICE_CID)
+@@ -64,17 +62,17 @@
  #endif
  NS_DEFINE_NAMED_CID(NS_PRIVATE_BROWSING_SERVICE_WRAPPER_CID);
  
@@ -1206,7 +1206,7 @@ diff --git a/browser/components/build/nsModule.cpp b/browser/components/build/ns
  #endif
      { &kNS_FEEDSNIFFER_CID, false, NULL, nsFeedSnifferConstructor },
      { &kNS_BROWSER_ABOUT_REDIRECTOR_CID, false, NULL, AboutRedirector::Create },
- #if defined(XP_WIN) && !defined(__MINGW32__)
+ #if defined(XP_WIN)
      { &kNS_WINIEHISTORYENUMERATOR_CID, false, NULL, nsIEHistoryEnumeratorConstructor },
  #elif defined(XP_MACOSX)
      { &kNS_SHELLSERVICE_CID, false, NULL, nsMacShellServiceConstructor },
@@ -1214,7 +1214,7 @@ diff --git a/browser/components/build/nsModule.cpp b/browser/components/build/ns
 diff --git a/browser/components/preferences/advanced.js b/browser/components/preferences/advanced.js
 --- a/browser/components/preferences/advanced.js
 +++ b/browser/components/preferences/advanced.js
-@@ -23,16 +23,22 @@ var gAdvancedPane = {
+@@ -23,16 +23,22 @@
      if (extraArgs && extraArgs["advancedTab"]){
        advancedPrefs.selectedTab = document.getElementById(extraArgs["advancedTab"]);
      } else {
@@ -1231,13 +1231,13 @@ diff --git a/browser/components/preferences/advanced.js b/browser/components/pre
 +
  #ifdef HAVE_SHELL_SERVICE
      this.updateSetDefaultBrowser();
- #endif
- #ifdef MOZ_UPDATER
-     this.updateReadPrefs();
- #endif
-     this.updateOfflineApps();
- #ifdef MOZ_CRASHREPORTER
-@@ -715,12 +721,23 @@ var gAdvancedPane = {
+ #ifdef XP_WIN
+     let shellSvc = getShellService();
+     // In Windows 8 we launch the control panel since it's the only
+     // way to get all file type association prefs. So we don't know
+     // when the user will select the default.  We refresh here periodically
+     // in case the default changes. 
+@@ -737,14 +743,25 @@
     * Set browser as the operating system default browser.
     */
    setDefaultBrowser: function()
@@ -1257,7 +1257,9 @@ diff --git a/browser/components/preferences/advanced.js b/browser/components/pre
 +          "BrowserApplication", "MozillaFirefox"];
 +      process.run(false, args, args.length);
 +    }
-     document.getElementById("setDefaultPane").selectedIndex = 1;
+     let selectedIndex =
+       shellSvc.isDefaultBrowser(false, true) ? 1 : 0;
+     document.getElementById("setDefaultPane").selectedIndex = selectedIndex;
    }
  #endif
  };
@@ -1279,7 +1281,7 @@ diff --git a/browser/components/shell/src/Makefile.in b/browser/components/shell
  endif
  endif
  endif
- 
+
  ifdef CPPSRCS
  LIBRARY_NAME = shellservice_s
  endif
