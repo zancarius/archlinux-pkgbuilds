@@ -8,6 +8,7 @@ pkgdesc="Python-based realtime logging and aggregation server."
 arch=(any)
 url="http://pypi.python.org/pypi/sentry"
 license=(BSD)
+backup=('etc/sentry/sentry.conf.py')
 depends=(
     'django-celery>=2.5.5'
     'django-crispy-forms>=1.1.4'
