@@ -180,7 +180,7 @@ diff --git a/toolkit/components/downloads/nsDownloadManager.cpp b/toolkit/compon
  #include "AndroidBridge.h"
  #endif
  
-@@ -2236,16 +2240,25 @@ nsDownload::SetState(DownloadState aStat
+@@ -2233,16 +2237,25 @@ nsDownload::SetState(DownloadState aStat
        nsCOMPtr<nsIPrefBranch> pref(do_GetService(NS_PREFSERVICE_CONTRACTID));
  
        // Master pref to control this function.
@@ -206,7 +206,7 @@ diff --git a/toolkit/components/downloads/nsDownloadManager.cpp b/toolkit/compon
          PRInt64 goat = PR_Now() - mStartTime;
          showTaskbarAlert = goat > alertIntervalUSec;
  
-@@ -2269,19 +2282,20 @@ nsDownload::SetState(DownloadState aStat
+@@ -2266,19 +2279,20 @@ nsDownload::SetState(DownloadState aStat
                // If downloads are automatically removed per the user's
                // retention policy, there's no reason to make the text clickable
                // because if it is, they'll click open the download manager and
@@ -305,7 +305,7 @@ new file mode 100644
 +                pack="end">
 +	<xul:button dlgtype="help" class="dialog-button" hidden="true"/>
 +	<xul:button dlgtype="extra2" class="dialog-button" hidden="true"/>
-+	<xul:spacer anonid="spacer" flex="1"/>
++	<xul:spacer anonid="spacer" flex="1" hidden="true"/>
 +	<xul:button dlgtype="accept" class="dialog-button" xbl:inherits="disabled=buttondisabledaccept"/>
 +	<xul:button dlgtype="extra1" class="dialog-button" hidden="true"/>
 +	<xul:button dlgtype="cancel" class="dialog-button"/>
@@ -1312,8 +1312,8 @@ new file mode 100644
 +        <xul:button dlgtype="accept" class="dialog-button" icon="accept"/>
 +#elif XP_UNIX
 +                pack="end">
-+        <xul:button dlgtype="help" class="dialog-button" hidden="true" icon="help"/>
-+        <xul:button dlgtype="extra2" class="dialog-button" hidden="true"/>
++	<xul:button dlgtype="help" class="dialog-button" hidden="true" icon="help"/>
++	<xul:button dlgtype="extra2" class="dialog-button" hidden="true"/>
 +	<xul:spacer anonid="spacer" flex="1"/>
 +	<xul:button dlgtype="accept" class="dialog-button" icon="accept"/>
 +	<xul:button dlgtype="extra1" class="dialog-button" hidden="true"/>
@@ -3227,7 +3227,7 @@ diff --git a/uriloader/exthandler/unix/nsOSHelperAppService.cpp b/uriloader/exth
 diff --git a/widget/gtk2/Makefile.in b/widget/gtk2/Makefile.in
 --- a/widget/gtk2/Makefile.in
 +++ b/widget/gtk2/Makefile.in
-@@ -104,11 +104,14 @@ DEFINES		+= -DCAIRO_GFX -DMOZ_APP_NAME='
+@@ -105,11 +105,14 @@ DEFINES		+= -DCAIRO_GFX -DMOZ_APP_NAME='
  
  INCLUDES	+= \
  		-I$(srcdir)/../xpwidgets \
@@ -3281,7 +3281,7 @@ diff --git a/widget/gtk2/nsFilePicker.cpp b/widget/gtk2/nsFilePicker.cpp
  using namespace mozilla;
  
  #define MAX_PREVIEW_SIZE 180
-@@ -253,17 +255,19 @@ nsFilePicker::AppendFilters(PRInt32 aFil
+@@ -252,17 +254,19 @@ nsFilePicker::AppendFilters(PRInt32 aFil
    return nsBaseFilePicker::AppendFilters(aFilterMask);
  }
  
@@ -3302,7 +3302,7 @@ diff --git a/widget/gtk2/nsFilePicker.cpp b/widget/gtk2/nsFilePicker.cpp
  
    mFilters.AppendElement(filter);
    mFilterNames.AppendElement(name);
-@@ -358,16 +362,19 @@ nsFilePicker::GetFiles(nsISimpleEnumerat
+@@ -357,16 +361,19 @@ nsFilePicker::GetFiles(nsISimpleEnumerat
    return NS_ERROR_FAILURE;
  }
  
@@ -3322,7 +3322,7 @@ diff --git a/widget/gtk2/nsFilePicker.cpp b/widget/gtk2/nsFilePicker.cpp
    GtkFileChooserAction action = GetGtkFileChooserAction(mMode);
    const gchar *accept_button = (action == GTK_FILE_CHOOSER_ACTION_SAVE)
                                 ? GTK_STOCK_SAVE : GTK_STOCK_OPEN;
-@@ -506,8 +513,234 @@ nsFilePicker::Show(PRInt16 *aReturn)
+@@ -505,8 +512,234 @@ nsFilePicker::Show(PRInt16 *aReturn)
      *aReturn = nsIFilePicker::returnCancel;
      break;
    }
@@ -3475,7 +3475,7 @@ diff --git a/widget/gtk2/nsFilePicker.cpp b/widget/gtk2/nsFilePicker.cpp
 +                 i < count;
 +                 ++i )
 +                {
-+                nsCOMPtr<nsILocalFile> localfile;
++                nsCOMPtr<nsIFile> localfile;
 +                nsresult rv = NS_NewNativeLocalFile( output[ i ],
 +                                      PR_FALSE,
 +                                      getter_AddRefs(localfile));
@@ -3496,19 +3496,19 @@ diff --git a/widget/gtk2/nsFilePicker.cpp b/widget/gtk2/nsFilePicker.cpp
 +                }
 +            }
 +  // Remember last used directory.
-+  nsCOMPtr<nsILocalFile> file;
++  nsCOMPtr<nsIFile> file;
 +  GetFile(getter_AddRefs(file));
 +  if (file) {
 +    nsCOMPtr<nsIFile> dir;
 +    file->GetParent(getter_AddRefs(dir));
-+    nsCOMPtr<nsILocalFile> localDir(do_QueryInterface(dir));
++    nsCOMPtr<nsIFile> localDir(do_QueryInterface(dir));
 +    if (localDir) {
 +      localDir.swap(mPrevDisplayDirectory);
 +    }
 +  }
 +        if (mMode == nsIFilePicker::modeSave)
 +            {
-+            nsCOMPtr<nsILocalFile> file;
++            nsCOMPtr<nsIFile> file;
 +            GetFile(getter_AddRefs(file));
 +            if (file)
 +                {
@@ -3749,7 +3749,7 @@ diff --git a/xpcom/io/Makefile.in b/xpcom/io/Makefile.in
 diff --git a/xpcom/io/nsLocalFileUnix.cpp b/xpcom/io/nsLocalFileUnix.cpp
 --- a/xpcom/io/nsLocalFileUnix.cpp
 +++ b/xpcom/io/nsLocalFileUnix.cpp
-@@ -48,16 +48,17 @@
+@@ -49,16 +49,17 @@
  #include "prproces.h"
  #include "nsIDirectoryEnumerator.h"
  #include "nsISimpleEnumerator.h"
@@ -3767,7 +3767,7 @@ diff --git a/xpcom/io/nsLocalFileUnix.cpp b/xpcom/io/nsLocalFileUnix.cpp
  #include "prmem.h"
  #include "plbase64.h"
  
-@@ -1763,44 +1764,51 @@ nsLocalFile::SetPersistentDescriptor(con
+@@ -1760,44 +1761,51 @@ nsLocalFile::SetPersistentDescriptor(con
      return InitWithNativePath(aPersistentDescriptor);
  #endif
  }
@@ -3833,7 +3833,7 @@ diff --git a/xpcom/io/nsLocalFileUnix.cpp b/xpcom/io/nsLocalFileUnix.cpp
        return rv;
      }
      return NS_ERROR_FAILURE;
-@@ -1826,16 +1834,23 @@ nsLocalFile::Launch()
+@@ -1823,16 +1831,23 @@ nsLocalFile::Launch()
  
      if (nsnull == connection)
        return NS_ERROR_FAILURE;

@@ -5,7 +5,7 @@
 # Weng Xuetian <wengxt@gmail.com>.
 
 pkgname=firefox-safebrowsing-opensuse
-pkgver=16.0
+pkgver=16.0.1
 pkgrel=1
 pkgdesc="Standalone web browser from mozilla.org with openSuSE patches and SafeBrowsing enabled"
 arch=('i686' 'x86_64')
@@ -23,49 +23,68 @@ install=firefox.install
 options=(!emptydirs)
 source=(
     https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/$pkgver/source/firefox-$pkgver.source.tar.bz2
-    mozconfig
+    firefox-browser-css.patch
     firefox.desktop
     firefox-install-dir.patch
-    vendor.js
-    firefox-browser-css.patch
     firefox-kde.patch
     kde.js
+    mozconfig
+    mozilla-gstreamer.patch
+    mozilla-gstreamer-760140.patch
     mozilla-kde.patch
     mozilla-nongnome-proxies.patch
     shared-libs.patch
+    vendor.js
 )
 md5sums=(
-    04cbefaebaf77693bacd11145ece104f # Firefox tarball
-    591d7173a7f5bc0ee01124fca80f3782 # mozconfig
-    bdeb0380c7fae30dd0ead6d2d3bc5873 # firefox.desktop
-    1e4bcac59e93d21fffa6a1d1ad235247 # firefox-install-dir.patch
-    0d053487907de4376d67d8f499c5502b # vendor.js
+    78e641c67dc4a40cb3f48fce3e782d41 # Firefox tarball
     b6fd821c02bde029a816ac043163dce0 # firefox-browser-css.patch
-    e06cefa5df75c994da03ae07dc284ae0 # firefox-kde.patch
+    bdeb0380c7fae30dd0ead6d2d3bc5873 # firefox.desktop
+    150ac0fb3ac7b2114c8e8851a9e0516c # firefox-install-dir.patch
+    e308ff4a14b122d385247e3335ddd42a # firefox-kde.patch
     75df0f88cc7a7fa7d522459e4ff82cc5 # kde.js
-    7b938fbdd415dc373ef6b8acbcc38cfe # mozilla-kde.patch
+    8931f77e7818cc9eb423f93ffb7c9a05 # mozconfig
+    9d5924e4cbe928662b5b2d01c775c432 # mozilla-gstreamer.patch
+    94eb526298bc2360410b01f575f63383 # mozilla-gstreamer-760140.patch
+    0d4cb76bd92d3e9e26b11bdc17964f00 # mozilla-kde.patch
     8b0ecfdf697485d7b7dd26291c0dc478 # mozilla-nongnome-proxies.patch
     52e52f840a49eb1d14be1c0065b03a93 # shared-libs.patch
+    0d053487907de4376d67d8f499c5502b # vendor.js
 )
 
 build() {
-    cd mozilla-release
 
-    cp ../mozconfig .mozconfig
+    cd "${srcdir}/mozilla-release"
+
+    patch -Np1 -i "${srcdir}/firefox-browser-css.patch"
+    patch -Np1 -i "${srcdir}/firefox-install-dir.patch"
+    patch -Np1 -i "${srcdir}/shared-libs.patch"
+
+    rm -f content/media/gstreamer/nsGStreamerFormatHelper.cpp \
+          content/media/gstreamer/nsGStreamerFormatHelper.h
+    rm -f browser/components/shell/src/nsKDEShellService.cpp \
+          browser/components/shell/src/nsKDEShellService.h \
+          browser/components/shell/src/nsUnixShellService.cpp \
+          browser/components/shell/src/nsUnixShellService.h \
+          browser/base/content/browser-kde.xul
+    rm -f toolkit/xre/nsKDEUtils.cpp \
+          toolkit/xre/nsKDEUtils.h \
+          uriloader/exthandler/unix/nsCommonRegistry.cpp \
+          uriloader/exthandler/unix/nsCommonRegistry.h \
+          uriloader/exthandler/unix/nsKDERegistry.cpp \
+          uriloader/exthandler/unix/nsKDERegistry.h \
+          toolkit/content/widgets/dialog-kde.xml \
+          toolkit/content/widgets/preferences-kde.xml
+
+    patch -Np1 -i "${srcdir}/mozilla-gstreamer.patch"
+    patch -Np1 -i "${srcdir}/mozilla-gstreamer-760140.patch"
+    patch -Np1 -i "${srcdir}/mozilla-nongnome-proxies.patch"
+    patch -Np1 -i "${srcdir}/mozilla-kde.patch"
+    patch -Np1 -i "${srcdir}/firefox-kde.patch"
+
+    cp "${srcdir}/mozconfig" .mozconfig
+
     install -m 644 "${srcdir}/kde.js" browser/app/profile/kde.js
-
-    #msg "Applying firefox-install-dir.patch"  
-    #patch -Np1 -i ../firefox-install-dir.patch
-    msg "Applying mozilla-nongnome-proxies.patch"  
-    patch -Np1 -i ../mozilla-nongnome-proxies.patch
-    msg "Applying mozilla-kde.patch"  
-    patch -Np1 -i ../mozilla-kde.patch
-    msg "Applying firefox-kde.patch"  
-    patch -Np1 -i ../firefox-kde.patch
-    msg "Applying firefox-browser-css.patch"  
-    patch -Np1 -i ../firefox-browser-css.patch
-    msg "Applying shared-libs.patch"  
-    patch -Np1 -i ../shared-libs.patch
 
     # Fix PRE_RELEASE_SUFFIX
     sed -i '/^PRE_RELEASE_SUFFIX := ""/s/ ""//' \
@@ -73,42 +92,50 @@ build() {
 
     export LDFLAGS="$LDFLAGS -Wl,-rpath,/usr/lib/firefox"
     export PYTHON="/usr/bin/python2"
-    export MOZ_MAKE_FLAGS="$MAKEFLAGS"
-    unset MAKEFLAGS
 
-    # Enable PGO
-    export MOZ_PGO=1
-    export DISPLAY=:99
-    Xvfb -nolisten tcp -extension GLX -screen 0 1280x1024x24 $DISPLAY &
+    # jemalloc + PGO
+    sed -i '/^NO_PROFILE_GUIDED_OPTIMIZE = 1$/d' \
+        memory/jemalloc/Makefile.in
 
-    make -f client.mk build
+    echo 'LDFLAGS += -lX11 -lXrender' >> layout/build/Makefile.in
 
+    if [ "${CARCH}" = "x86_64" ]; then
+        make -f client.mk build MOZ_MAKE_FLAGS="${MAKEFLAGS}"
+    fi
+
+    LD_PRELOAD="" /usr/bin/Xvfb -nolisten tcp -extension GLX -screen 0 1280x1024x24 :99 &
+    LD_PRELOAD="" DISPLAY=:99 make -j1 -f client.mk profiledbuild MOZ_MAKE_FLAGS="${MAKEFLAGS}"
     kill $! || true
+
 }
 
-package() {
-    cd mozilla-release
-    make -j1 -f client.mk DESTDIR="$pkgdir" install
 
-    install -m644 ../vendor.js "$pkgdir/usr/lib/firefox/defaults/pref"
+package() {
+
+    cd "${srcdir}/mozilla-release"
+    make -f client.mk DESTDIR="${pkgdir}" install
+
+    install -m644 ../vendor.js "${pkgdir}/usr/lib/firefox/defaults/pref"
+    install -m644 ../kde.js "${pkgdir}/usr/lib/firefox/defaults/pref"
 
     for i in 16 22 24 32 48 256; do
-        install -Dm644 browser/branding/official/default$i.png \
-            "$pkgdir/usr/share/icons/hicolor/${i}x${i}/apps/firefox.png"
+        install -Dm644 browser/branding/official/default${i}.png \
+            "${pkgdir}/usr/share/icons/hicolor/${i}x${i}/apps/firefox.png"
     done
 
     install -Dm644 ../firefox.desktop \
-        "$pkgdir/usr/share/applications/firefox.desktop"
+        "${pkgdir}/usr/share/applications/firefox.desktop"
 
     # Use system-provided dictionaries
-    rm -rf "$pkgdir"/usr/lib/firefox/{dictionaries,hyphenation}
-    ln -s /usr/share/hunspell "$pkgdir/usr/lib/firefox/dictionaries"
-    ln -s /usr/share/hyphen "$pkgdir/usr/lib/firefox/hyphenation"
+    rm -rf "${pkgdir}"/usr/lib/firefox/{dictionaries,hyphenation}
+    ln -s /usr/share/hunspell "${pkgdir}/usr/lib/firefox/dictionaries"
+    ln -s /usr/share/hyphen "${pkgdir}/usr/lib/firefox/hyphenation"
 
     # We don't want the development stuff
-    rm -r "$pkgdir"/usr/{include,lib/firefox-devel,share/idl}
+    rm -r "${pkgdir}"/usr/{include,lib/firefox-devel,share/idl}
 
     #workaround for now
     #https://bugzilla.mozilla.org/show_bug.cgi?id=658850
-    ln -sf firefox "$pkgdir/usr/lib/firefox/firefox-bin"
+    ln -sf firefox "${pkgdir}/usr/lib/firefox/firefox-bin"
+
 }
