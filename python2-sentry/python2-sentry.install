@@ -24,8 +24,8 @@ located at:
 
     /etc/sentry/sentry.conf.py
     
-You will most likely want to modify this file particularly if you're
-planning on using something other than SQLite as the backend database.
+You will most likely want to modify this file if you're planning on
+using something other than SQLite as the backend database.
 
 EOF
                          
