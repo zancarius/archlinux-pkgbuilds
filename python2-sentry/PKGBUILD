@@ -2,14 +2,13 @@
 # Source: https://github.com/zancarius/archlinux-pkgbuilds
 
 pkgname=python2-sentry
-pkgver=5.0.18.2
-pkgrel=1
+pkgver=5.0.19
+pkgrel=3
 pkgdesc="Python-based realtime logging and aggregation server."
 arch=(any)
 url="http://pypi.python.org/pypi/sentry"
 license=(BSD)
 depends=(
-    'django-celery>=2.5.5'
     'django-crispy-forms>=1.1.4'
     'django-indexer>=0.3.0'
     'django-paging>=0.2.4'
@@ -24,8 +23,8 @@ depends=(
     'python2-amqplib>=1.0.2'
     'python2-beautifulsoup3>=3.2.1'
     'python2-billiard>=2.7.3.12'
-    'python2-celery>=2.5.3'
     'python2-dateutil>=1.5'
+    'python2-django-celery>=2.5.5'
     'python2-httpagentparser>=1.0.5'
     'python2-kombu>=2.4.0'
     'python2-logan>=0.5.1'
@@ -47,7 +46,7 @@ source=(
     "sentry.service"
 )
 md5sums=(
-    c0f5aa2b78e17d2e1539fe4e30a029ff # sentry tarball
+    7eb4c7f6350258b15cbc34aefcbcedd1 # sentry tarball
     2a81eab390a6b23d25179325c5c158d3 # install file
     5735e776b1842c686ebf074b1904e7bd # systemd service
 )
