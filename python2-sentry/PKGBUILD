@@ -1,9 +1,22 @@
 # Maintainer: Benjamin A. Shelton <zancarius@gmail.com>
 # Source: https://github.com/zancarius/archlinux-pkgbuilds
 
+## !!! WARNING, PLEASE READ !!! ##
+#
+# python2-sentry will be RENAMED to sentry as per the Arch
+# Python packaging guidelines since this is an application and
+# not a library:
+# https://wiki.archlinux.org/index.php/Python_Package_Guidelines
+#
+# Please install the package "sentry" instead.
+#
+# I will continue maintaining this package for a few update
+# cycles until December 1st, 2012, at which point this package
+# WILL BE MERGED into sentry.
+
 pkgname=python2-sentry
 pkgver=5.0.20.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Python-based realtime logging and aggregation server."
 arch=(any)
 url="http://pypi.python.org/pypi/sentry"
@@ -11,14 +24,14 @@ license=(BSD)
 depends=(
     'django-crispy-forms>=1.1.4'
     'django-indexer>=0.3.0'
-    'django-paging>=0.2.4'
+    'django-paging>=0.2.3'
     'django-picklefield>=0.2.0'
     'django-social-auth>=0.7.1'
     'django-social-auth-trello>=1.0.2'
     'django-templatetag-sugar>=0.1'
     'gunicorn>=0.14.6'
     python2
-    'python-anyjson>=0.3.3'
+    'python-anyjson>=0.3.1'
     'python-simplejson>=2.1.6'
     'python2-amqplib>=1.0.2'
     'python2-beautifulsoup3>=3.2.1'
