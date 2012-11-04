@@ -2,8 +2,8 @@
 # Source: https://github.com/zancarius/archlinux-pkgbuilds
 
 pkgname=python2-sentry
-pkgver=5.0.19
-pkgrel=3
+pkgver=5.0.20.1
+pkgrel=1
 pkgdesc="Python-based realtime logging and aggregation server."
 arch=(any)
 url="http://pypi.python.org/pypi/sentry"
@@ -46,7 +46,7 @@ source=(
     "sentry.service"
 )
 md5sums=(
-    7eb4c7f6350258b15cbc34aefcbcedd1 # sentry tarball
+    fa2ccf26b186979b7faf0a78af0f56a7 # sentry tarball
     2a81eab390a6b23d25179325c5c158d3 # install file
     5735e776b1842c686ebf074b1904e7bd # systemd service
 )
