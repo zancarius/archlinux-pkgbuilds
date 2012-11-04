@@ -47,7 +47,7 @@ source=(
 )
 md5sums=(
     fa2ccf26b186979b7faf0a78af0f56a7 # sentry tarball
-    2a81eab390a6b23d25179325c5c158d3 # install file
+    285bd39734a1b3d9f64e0b2f376f47b3 # install file
     5735e776b1842c686ebf074b1904e7bd # systemd service
 )
 
