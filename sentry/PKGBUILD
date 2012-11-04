@@ -8,6 +8,7 @@ pkgdesc="Python-based realtime logging and aggregation server."
 arch=(any)
 url="http://pypi.python.org/pypi/sentry"
 license=(BSD)
+replaces=(python2-sentry)
 depends=(
     'django-crispy-forms>=1.1.4'
     'django-indexer>=0.3.0'
