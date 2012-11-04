@@ -3,11 +3,11 @@
 
 pkgname=python2-gevent-websocket
 pkgver=0.3.6
-pkgrel=2
+pkgrel=3
 pkgdesc="Websocket handler for the gevent pywsgi server, a Python network library."
 arch=(any)
 url="http://pypi.python.org/pypi/gevent-websocket"
-license=(Apache)
+license=(BSD)
 depends=(python2 python2-gevent)
 makedepends=(python2-distribute)
 source=("http://pypi.python.org/packages/source/g/gevent-websocket/gevent-websocket-${pkgver}.tar.gz")
@@ -17,5 +17,7 @@ build () {
     
     cd "${srcdir}/gevent-websocket-${pkgver}"
     python2 setup.py install --root="${pkgdir}/" --optimize=1
+
+    install -Dm0644 "${srcdir}/gevent-websocket-${pkgver}/LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 
 }
