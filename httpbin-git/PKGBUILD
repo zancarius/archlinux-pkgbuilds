@@ -52,6 +52,8 @@ build () {
     
     cd "${_gitname}-work"
 
+    msg "Applying depends.patch to correct setup.py dependencies..."
+
     patch -Np1 -i ../../depends.patch
     
     python2 setup.py install --root="${pkgdir}/"
