@@ -1,10 +1,10 @@
-# Maintainer: Benjamin A. Shelton <zancarius@gmail.com>
+# Maintainer: Benjamin A. Shelton <zancarius at gmail _ com>
 # Source: https://github.com/zancarius/archlinux-pkgbuilds
 
 pkgname=django-social-auth
-pkgver=0.7.7
+pkgver=0.7.8
 pkgrel=1
-pkgdesc="Django social authentication made simple."
+pkgdesc="Social authentication made simple."
 arch=(any)
 url="http://pypi.python.org/pypi/django-social-auth"
 license=(GPL)
@@ -12,10 +12,11 @@ depends=(python2 python2-openid python2-oauth2)
 makedepends=(python2-distribute)
 conflicts=(django-socialauth-git)
 source=("http://pypi.python.org/packages/source/d/${pkgname}/${pkgname}-${pkgver}.tar.gz")
-md5sums=(d9fa30441e10cb90a1ad06b1b4a1f2d8)
+md5sums=(9cc545a8b6e8a9c7065221e56bc543ef)
 
 build () {
     
     cd "${srcdir}/${pkgname}-${pkgver}"
     python2 setup.py install --root="${pkgdir}/" --optimize=1
+
 }
