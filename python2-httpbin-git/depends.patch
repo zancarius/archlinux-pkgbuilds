@@ -1,8 +1,6 @@
-diff --git a/setup.py b/setup.py
-index 7525bbf..4c8c4ac 100755
---- a/setup.py
-+++ b/setup.py
-@@ -16,15 +16,15 @@ if sys.argv[-1] == 'publish':
+--- httpbin/setup.py	2012-11-05 00:09:21.423337195 -0700
++++ httpbin-work/setup.py	2012-11-05 00:10:23.328324958 -0700
+@@ -16,12 +16,12 @@
  
  
  deps = [
@@ -10,20 +8,14 @@ index 7525bbf..4c8c4ac 100755
 -    'Flask-Script==0.3.1',
 -    'Jinja2==2.5.5',
 -    'Werkzeug==0.8.1',
--    'argparse==1.2.1',
 -    'distribute==0.6.15',
--    'wsgiref==0.1.2',
 -    'decorator==3.3.2',
--    'omnijson==0.1.2',
 +    'Flask>=0.8',
 +    'Flask-Script>=0.3.1',
 +    'Jinja2>=2.5.5',
 +    'Werkzeug>=0.8.1',
-+    'argparse>=1.2.1',
 +    'distribute>=0.6.15',
-+    'wsgiref>=0.1.2',
 +    'decorator>=3.3.2',
-+    'omnijson>=0.1.2',
      'gevent'
  ]
  
