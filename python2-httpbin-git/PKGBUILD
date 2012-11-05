@@ -1,6 +1,19 @@
 # Maintainer: Benjamin A. Shelton <zancarius at gmail _ com>
 # Source: https://github.com/zancarius/archlinux-pkgbuilds
 
+## !!! WARNING, PLEASE READ !!! ##
+#
+# python2-httpbin-git will be RENAMED to httpbin-git as per the Arch
+# Python packaging guidelines since this is an application and
+# not a library:
+# https://wiki.archlinux.org/index.php/Python_Package_Guidelines
+#
+# Please install the package "httpbin-git" instead.
+#
+# I will continue maintaining this package for a few update
+# cycles until December 1st, 2012, at which point this package
+# WILL BE MERGED into httpbin-git.
+
 pkgname=python2-httpbin-git
 pkgver=20121105
 pkgrel=1
