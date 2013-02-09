@@ -2,7 +2,7 @@
 # Source: https://github.com/zancarius/archlinux-pkgbuilds
 
 pkgname=httpbin-git
-pkgver=20121105
+pkgver=20130209
 pkgrel=1
 pkgdesc="HTTP request and response service--useful for unit testing."
 arch=(any)
@@ -52,9 +52,9 @@ build () {
     
     cd "${_gitname}-work"
 
-    msg "Applying depends.patch to correct setup.py dependencies..."
+    #msg "Applying depends.patch to correct setup.py dependencies..."
 
-    patch -Np1 -i ../../depends.patch
+    #patch -Np1 -i ../../depends.patch
     
     python2 setup.py install --root="${pkgdir}/"
     
