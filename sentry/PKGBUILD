@@ -22,7 +22,7 @@ source=(
 )
 md5sums=(
     8c92260cc2b956edf8340b5634ba0b08 # sentry tarball
-    87ebe90349b1922b3fd5f84a29db9263 # sentry.install
+    b84c5355bb5097cc95b1ac7d5ed4add7 # sentry.install
     ebb9875dedec90b5b9eda00fab49f25e # sentry.service
 )
 
@@ -33,8 +33,8 @@ build () {
 
     source "${pkgdir}/opt/sentry/bin/activate"
 
-    "${pkgdir}/opt/sentry/bin/pip" install mysql-python
-    "${pkgdir}/opt/sentry/bin/pip" install psycopg2
+    # Workaround for circumstances where cssutils may not be installed
+    # into the virtualenv at the correct version.
     "${pkgdir}/opt/sentry/bin/pip" install "cssutils>=0.9.9,<0.10.0"
 
     cd "${srcdir}/${pkgname}-${pkgver}"    
