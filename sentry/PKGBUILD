@@ -33,15 +33,9 @@ build () {
 
     source "${pkgdir}/opt/sentry/bin/activate"
 
-    # Uncomment this and set it to a directory your account can write to if
-    # you intend to rebuild this package in the future. It will save
-    # bandwidth!
-    export PIP_DOWNLOAD_CACHE=/home/bshelton/.python2/downloads
-
     "${pkgdir}/opt/sentry/bin/pip" install mysql-python
     "${pkgdir}/opt/sentry/bin/pip" install psycopg2
     "${pkgdir}/opt/sentry/bin/pip" install "cssutils>=0.9.9,<0.10.0"
-    #"${pkgdir}/opt/sentry/bin/pip" install "python-dateutil>=1.5.0,<2.0.0"
 
     cd "${srcdir}/${pkgname}-${pkgver}"    
     "${pkgdir}/opt/sentry/bin/python2" setup.py install --optimize=1
