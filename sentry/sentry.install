@@ -1,24 +1,21 @@
 post_install(){
-    
+
     /usr/sbin/useradd -s /bin/false -d /opt/sentry -r sentry
 
     chown -R sentry:sentry /opt/sentry
 
-    if [ -e /opt/sentry/sentry.conf.py ] ; then
-   
-        /bin/mkdir -p /etc/sentry
-        cp -a /opt/sentry/sentry.conf.py /etc/sentry/   
-   
+    if [ ! -d /etc/sentry ]
+    then
+        /bin/mkdir /etc/sentry
     fi
-    
-    if [ ! -e /etc/sentry/sentry.conf.py ] ; then
-    
-        if [ ! -d /etc/sentry ] ; then
-        
-            /bin/mkdir /etc/sentry
-        
-        fi
-        
+
+    if [ ! -e /etc/sentry/sentry.conf.py ]
+    then
+        /bin/mkdir -p /etc/sentry
+        PATH=/opt/sentry/bin /opt/sentry/bin/sentry init /etc/sentry/sentry.conf.py
+        chown -R sentry:sentry /etc/sentry
+    fi
+
 cat << EOF
 
 No configuration for Sentry was detected. This will create one for you
