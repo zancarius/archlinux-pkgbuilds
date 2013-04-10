@@ -22,7 +22,7 @@ source=(
 )
 md5sums=(
     8c92260cc2b956edf8340b5634ba0b08 # sentry tarball
-    0ba2e9688411e4ee6612ec8a5faf961c # sentry.install
+    e2bd1d37f543f26ae43fd9bc4e8e6444 # sentry.install
     ebb9875dedec90b5b9eda00fab49f25e # sentry.service
 )
 
