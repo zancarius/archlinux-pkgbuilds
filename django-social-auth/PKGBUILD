@@ -3,7 +3,7 @@
 
 pkgname=django-social-auth
 pkgver=0.7.22
-pkgrel=1
+pkgrel=2
 pkgdesc="Social authentication made simple."
 arch=(any)
 url="http://pypi.python.org/pypi/django-social-auth"
@@ -14,7 +14,7 @@ conflicts=(django-socialauth-git)
 source=("http://pypi.python.org/packages/source/d/${pkgname}/${pkgname}-${pkgver}.tar.gz")
 md5sums=(1f6750781c6d217b69f932376dbba62c)
 
-build () {
+package () {
     
     cd "${srcdir}/${pkgname}-${pkgver}"
     python2 setup.py install --root="${pkgdir}/" --optimize=1
