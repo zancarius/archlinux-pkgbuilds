@@ -13,7 +13,7 @@ depends=('libedit')
 makedepends=('clang' 'cmake' 'gcc' 'llvm' 'subversion')
 options=(!buildflags)
 sha256sums=(
-    59ae0df95605b554637290812e3948abdf6946cdaba50e14b5f5a64da3979604
+    05f53eb5e4517f5209bdad2d031a3abc547548de67550f9d6941b279d4e9444d
 )
 
 _svntrunk=http://ccons.googlecode.com/svn/trunk/

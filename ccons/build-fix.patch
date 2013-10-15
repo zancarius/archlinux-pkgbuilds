@@ -6,7 +6,7 @@ diff -u ccons/CMakeLists.txt ccons-patched/CMakeLists.txt
  exec_program(${LLVM_CONFIG_EXECUTABLE} ARGS --cflags OUTPUT_VARIABLE LLVM_C_FLAGS)
  exec_program(${LLVM_CONFIG_EXECUTABLE} ARGS --cxxflags OUTPUT_VARIABLE LLVM_CXX_FLAGS)
 -set(CLANG_LIBS "-lclangFrontend -lclangAST -lclangLex -lclangCodeGen -lclangSema -lclangSerialization -lclangParse -lclangAST -lclangBasic -lclangAnalysis -lclangEdit")
-+set(CLANG_LIBS "-L../../Debug+Asserts/lib -lclangFrontendTool -lclangFrontend -lclangDriver -lclangSerialization -lclangCodeGen -lclangParse -lclangSema -lclangEdit -lclangStaticAnalyzerFrontend -lclangStaticAnalyzerCheckers -lclangStaticAnalyzerCore -lclangAnalysis -lclangARCMigrate -lclangAST -lclangLex -lclangBasic")
++set(CLANG_LIBS "-lclangFrontend -lclangSerialization -lclangCodeGen -lclangParse -lclangSema -lclangEdit -lclangAST -lclangLex -lclangBasic -lclangAnalysis")
 +
  
  Project(ccons)
