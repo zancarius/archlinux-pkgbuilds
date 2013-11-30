@@ -7,26 +7,20 @@ pkgrel=1
 pkgdesc="HTTP request and response service--useful for unit testing."
 arch=(any)
 url="https://github.com/kennethreitz/httpbin"
-license=(MIT)
-conflicts=(python2-httpbin-git)
-depends=(
-    python2-argparse
-    python2-blinker
-    python2-decorator
-    python2-flask
-    python2-flask-script
-    python2-gevent
-    python2-jinja
-    python2-newrelic
-    python2-omnijson
-    python2-raven
-    python2-werkzeug
+license=(ISC)
+source=(
+    httpbin-git.install
+    httpbin.service
+)
+md5sums=(
+c0caf33597fe318c9d2bd8ad0ae90b25 # httpbin-git.install
+7af8476eb84f4c6c61a4c74ab0a65f38 # httpbin.service
 )
 makedepends=(
     git
     python2-distribute
 )
-
+install="${pkgname}.install"
 _gitroot="https://github.com/kennethreitz/httpbin.git"
 _gitname="httpbin"
 
@@ -36,21 +30,35 @@ build () {
     
     if [ -d "${_gitname}/.git" ] ; then
         msg "Updating git repository..."
-        (cd "${_gitname}" && git checkout setup.py && git pull)
+        (cd "${_gitname}" && git pull)
     else
         msg "Cloning git repository..."
         git clone --depth=1 ${_gitroot} ${_gitname}
     fi
 
-    cp -a "${_gitname}" "${_gitname}-work"
-
 }
 
 package () {
 
-    cd "${_gitname}-work"
+    mkdir -p "${pkgdir}/opt/httpbin"
+    virtualenv2 --python=python2.7 "${pkgdir}/opt/httpbin"
+    virtualenv2 --relocatable "${pkgdir}/opt/httpbin"
 
-    python2 setup.py install --root="${pkgdir}/" --optimize=1
-    install -Dm0664 "${srcdir}/${_gitname}/LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+    source "${pkgdir}/opt/httpbin/bin/activate"
+    "${pkgdir}/opt/httpbin/bin/pip" install -r "${srcdir}/${_gitname}/requirements.txt"
+
+    # virtualenv's --relocatable doesn't fix the path of VIRTUAL_ENV so we
+    # must do this manually.
+    cat "${pkgdir}/opt/httpbin/bin/activate" | sed "s#${pkgdir}##" > "${pkgdir}/opt/httpbin/bin/activate.new"
+    mv "${pkgdir}/opt/httpbin/bin/activate.new" "${pkgdir}/opt/httpbin/bin/activate"
+       
+    # Something of an ugly hack. The master doesn't have a setup.py anymore and
+    # it appears the httpbin2 branch setup.py doesn't play nicely with
+    # makepkg. So, we'll do this manually.
+    cd "${srcdir}/${_gitname}"
+    git archive master | tar -x -C "${pkgdir}/opt/httpbin/"
+
+    install -Dm0644 "${srcdir}/${_gitname}/LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+    install -Dm0644 "${srcdir}/${_gitname}.service" "${pkgdir}/usr/lib/systemd/system/httpbin.service"
 
 }
