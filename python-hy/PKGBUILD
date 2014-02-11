@@ -1,0 +1,20 @@
+# Maintainer: Benjamin A. Shelton <zancarius@gmail.com>
+# Source: https://github.com/zancarius/archlinux-pkgbuilds
+pkgname=python-hy
+pkgver=0.9.12
+pkgrel=1
+pkgdesc="Bidirectional Python/Lisp layer."
+arch=(any)
+url="http://pypi.python.org/pypi/hy"
+license=(Expat)
+depends=(python)
+makedepends=(python-setuptools)
+source=("http://pypi.python.org/packages/source/h/hy/hy-${pkgver}.tar.gz")
+md5sums=(af84bec722698a2dd55cb7d299cc4150)
+
+package () {
+
+    cd "${srcdir}/hy-${pkgver}"
+    python setup.py install --root="${pkgdir}/" --optimize=1
+
+}
