@@ -9,10 +9,13 @@ pkgdesc="Websocket handler for the gevent pywsgi server, a Python network librar
 arch=(any)
 url="http://pypi.python.org/pypi/gevent-websocket"
 license=(Apache)
-depends=(python2 python2-gevent python2-greenlet python2-ujson)
+depends=(python2 python2-gevent)
 makedepends=(cython2 python2-setuptools)
 source=("https://pypi.python.org/packages/source/g/gevent-websocket/gevent-websocket-${pkgver}.tar.gz")
 md5sums=(eb59f931d60e068e95adecefaed54df7)
+optdepends=(
+    'python2-ujson: Ultra-fast JSON encoder and decoder for Python.'
+)
 
 package () {
     
