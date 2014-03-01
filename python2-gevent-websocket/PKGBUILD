@@ -1,4 +1,5 @@
 # Maintainer: Benjamin A. Shelton <zancarius@gmail.com>
+# Contributor: Andy Weidenbaum <archbaum@gmail.com>
 # Source: https://github.com/zancarius/archlinux-pkgbuilds
 
 pkgname=python2-gevent-websocket
@@ -7,10 +8,10 @@ pkgrel=1
 pkgdesc="Websocket handler for the gevent pywsgi server, a Python network library."
 arch=(any)
 url="http://pypi.python.org/pypi/gevent-websocket"
-license=(BSD)
-depends=(python2 python2-gevent)
-makedepends=(python2-setuptools)
-source=("http://pypi.python.org/packages/source/g/gevent-websocket/gevent-websocket-${pkgver}.tar.gz")
+license=(Apache)
+depends=(python2 python2-gevent python2-greenlet python2-ujson)
+makedepends=(cython2 python2-setuptools)
+source=("https://pypi.python.org/packages/source/g/gevent-websocket/gevent-websocket-${pkgver}.tar.gz")
 md5sums=(eb59f931d60e068e95adecefaed54df7)
 
 package () {
