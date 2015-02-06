@@ -40,12 +40,11 @@ package () {
     # into the virtualenv at the correct version.
     "${pkgdir}/opt/sentry/bin/pip" install "cssutils>=0.9.9,<0.10.0"
 
-    cd "${srcdir}/${pkgname}-${pkgver}"    
+    cd "${srcdir}/${pkgname}-${pkgver}"
     "${pkgdir}/opt/sentry/bin/python2" setup.py install --optimize=1
 
     virtualenv2 --relocatable "${pkgdir}/opt/sentry"
-    cat "${pkgdir}/opt/sentry/bin/activate" | sed "s#${pkgdir}##" > "${pkgdir}/opt/sentry/bin/activate.new"
-    mv "${pkgdir}/opt/sentry/bin/activate.new" "${pkgdir}/opt/sentry/bin/activate"
+    sed -i "s#${pkgdir}##" "${pkgdir}/opt/sentry/bin/activate"
 
     mkdir -p "${pkgdir}/opt/sentry/.python-eggs"
     mkdir -p "${pkgdir}/etc/sentry"
