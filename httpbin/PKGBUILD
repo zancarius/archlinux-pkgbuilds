@@ -36,8 +36,7 @@ package () {
     "${pkgdir}/opt/httpbin/bin/pip" install gunicorn
 
     virtualenv --relocatable "${pkgdir}/opt/httpbin"
-    cat "${pkgdir}/opt/httpbin/bin/activate" | sed "s#${pkgdir}##" > "${pkgdir}/opt/httpbin/bin/activate.new"
-    mv "${pkgdir}/opt/httpbin/bin/activate.new" "${pkgdir}/opt/httpbin/bin/activate"
+    sed -i "s#${pkgdir}##" "${pkgdir}/opt/httpbin/bin/activate.new"
 
     install -Dm0644 "${srcdir}/httpbin.service" "${pkgdir}/usr/lib/systemd/system/httpbin.service"
 
