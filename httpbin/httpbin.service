@@ -6,7 +6,8 @@ After=network.target
 User=nobody
 Restart=always
 Environment=PATH=/opt/httpbin/bin
-ExecStart=/opt/httpbin/bin/gunicorn --log-level=error httpbin:app
+EnvironmentFile=-/etc/conf.d/httpbin
+ExecStart=/opt/httpbin/bin/gunicorn --log-level=error --bind=$HOST:$PORT httpbin:app
 
 [Install]
 WantedBy=multi-user.target

@@ -15,10 +15,12 @@ options=(!strip)
 source=(
     "https://pypi.python.org/packages/3.4/h/${pkgname}/${pkgname}-${pkgver}-py2.py3-none-any.whl"
     httpbin.service
+    httpbin.confd
 )
 md5sums=(
     66a4290ddf8f0111253b98d851c5460f # httpbin tarball
-    408b788c6dfb2d7ec48c7d1141200252 # httpbin service
+    921f3b939d3370d405539b9bafc075af # httpbin service
+    418aea521325ca495317590192d505a0 # httpbin conf.d environment
 )
 
 package () {
@@ -36,8 +38,8 @@ package () {
     "${pkgdir}/opt/httpbin/bin/pip" install gunicorn
 
     virtualenv --relocatable "${pkgdir}/opt/httpbin"
-    sed -i "s#${pkgdir}##" "${pkgdir}/opt/httpbin/bin/activate.new"
+    sed -i "s#${pkgdir}##" "${pkgdir}/opt/httpbin/bin/activate"
 
     install -Dm0644 "${srcdir}/httpbin.service" "${pkgdir}/usr/lib/systemd/system/httpbin.service"
-
+    install -Dm0644 "${srcdir}/httpbin.confd" "${pkgdir}/etc/conf.d/httpbin"
 }
