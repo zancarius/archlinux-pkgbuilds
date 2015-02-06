@@ -1,0 +1,44 @@
+# Maintainer: Benjamin A. Shelton <zancarius@gmail.com>
+# Source: https://github.com/zancarius/archlinux-pkgbuilds
+
+pkgname=httpbin
+pkgver=0.2.0
+pkgrel=1
+pkgdesc="HTTP request and response service."
+arch=(any)
+url="http://pypi.python.org/pypi/httpbin"
+license=(ISC)
+depends=(python)
+makedepends=(python-pip python-setuptools python-virtualenv)
+options=(!strip)
+#install="${pkgname}.install"
+source=(
+    "https://pypi.python.org/packages/3.4/h/${pkgname}/${pkgname}-${pkgver}-py2.py3-none-any.whl"
+    httpbin.service
+)
+md5sums=(
+    66a4290ddf8f0111253b98d851c5460f # httpbin tarball
+    408b788c6dfb2d7ec48c7d1141200252 # httpbin service
+)
+
+package () {
+
+    mkdir -p "${pkgdir}/opt/httpbin"
+    virtualenv --python=python3.4 "${pkgdir}/opt/httpbin"
+
+    source "${pkgdir}/opt/httpbin/bin/activate"
+
+    cd "${srcdir}"    
+    "${pkgdir}/opt/httpbin/bin/pip" install "${pkgname}-${pkgver}-py2.py3-none-any.whl"
+
+    # Install gunicorn into the virtualenv. You can optionally run httpbin via:
+    # source /opt/httpbin/bin/activate && /opt/httpbin/python -m httpbin.core
+    "${pkgdir}/opt/httpbin/bin/pip" install gunicorn
+
+    virtualenv --relocatable "${pkgdir}/opt/httpbin"
+    cat "${pkgdir}/opt/httpbin/bin/activate" | sed "s#${pkgdir}##" > "${pkgdir}/opt/httpbin/bin/activate.new"
+    mv "${pkgdir}/opt/httpbin/bin/activate.new" "${pkgdir}/opt/httpbin/bin/activate"
+
+    install -Dm0644 "${srcdir}/httpbin.service" "${pkgdir}/usr/lib/systemd/system/httpbin.service"
+
+}

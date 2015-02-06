@@ -1,0 +1,12 @@
+[Unit]
+Description=httpbin request/response testing framework
+After=network.target
+
+[Service]
+User=nobody
+Restart=always
+Environment=PATH=/opt/httpbin/bin
+ExecStart=/opt/httpbin/bin/gunicorn --log-level=error httpbin:app
+
+[Install]
+WantedBy=multi-user.target
