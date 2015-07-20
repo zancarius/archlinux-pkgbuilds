@@ -2,17 +2,23 @@
 
 ## WARNING: This is branch contains the *old* PKGBUILD archives
 
-**Under this branch there's a directory fittingly named `old`.** Is this
-counter to "good" use of Git? Maybe. But it doesn't really matter. I've
-removed this folder from the `master` branch since it's apparent from
-some recent experiences that this both serves as a source of confusion for
-some individuals who are under the mistaken impression that there exists
-only the One True Way of Git repositories.
+**Under this branch you will find PKGBUILDs that have been retired.** These
+PKGBUILDs are interred in the `old` directory since I want to avoid
+polluting the top level. Is this counter to "good" use of Git? Maybe.
+But it doesn't really matter. I've removed this folder from the `master`
+branch since it's apparent from recent experience that this serves as both
+a source of confusion for individuals who are under the mistaken impression
+that there exists only One True Way of Git repositories (which boggles my mind
+considering the stupidly simplistic structure contained herein), *and* it
+makes it unnecessarily difficult for the same to comprehend how someone
+else might have a workflow that differs from their own. Shocking.
 
-Note: The general structure of this repo *is* messy. But it doesn't contain
-application sources either. It's just a place to hang my PKGBUILDs. Don't
-like it? No problem. Fork it yourself. Make your own. If you complain about
-it, I'll give you a full refund for $0.00.
+Almost scandalous, in fact.
+
+Note: The general structure of this repo is probably a bit messy. But it
+doesn't contain application sources either. It's just a place to hang my
+PKGBUILDs. Don't like it? No problem. Fork it yourself. Make your own. If
+you complain about it, I'll give you a full refund for $0.00.
 
 ## About
 
