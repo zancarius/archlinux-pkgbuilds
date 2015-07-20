@@ -72,16 +72,6 @@ mistakes made from copying template PKGBUILDs, but it does happen on occasion.
 Please don't feel offended if it does; it's probably an honest mistake that I
 happened to overlook, but don't hesitate to alert me.
 
-## archey-omz-git
-
-`archey-omz-git` is a PKGBUILD for archydevil's [oh-my-zsh fork](https://github.com/archeydevil/oh-my-zsh)
-for Arch Linux. His original AUR package, `oh-my-zsh`, mysteriously vanished
-around the latter part of April 2012 when he submitted a
-[removal request](http://mailman.archlinux.org/pipermail/aur-general/2012-April/018702.html).
-His planned changes thusfar have never made it back into the AUR for
-reasons unknown. Until they do, this repo will be made available for
-anyone who deeply appreciated his work.
-
 ## babl-016
 
 `babl-016` is one of two required builds for GIMP v2.6. Specifically, GIMP
