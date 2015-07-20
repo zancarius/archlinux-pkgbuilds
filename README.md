@@ -1,5 +1,21 @@
 # Arch Linux PKGBUILDs Collection, Zancarius-flavored
 
+## WARNING: This is branch contains the *old* PKGBUILD archives
+
+**Under this branch there's a directory fittingly named `old`.** Is this
+counter to "good" use of Git? Maybe. But it doesn't really matter. I've
+removed this folder from the `master` branch since it's apparent from
+some recent experiences that this both serves as a source of confusion for
+some individuals who are under the mistaken impression that there exists
+only the One True Way of Git repositories.
+
+Note: The general structure of this repo *is* messy. But it doesn't contain
+application sources either. It's just a place to hang my PKGBUILDs. Don't
+like it? No problem. Fork it yourself. Make your own. If you complain about
+it, I'll give you a full refund for $0.00.
+
+## About
+
 The PKGBUILDs contained in this repository are mostly just odds and ends that
 I find useful for my own purposes. If you find them useful, too, feel free to
 clone or fork this repository. Likewise, if you feel an update is lacking,
