@@ -2,7 +2,7 @@
 # Source: https://github.com/zancarius/archlinux-pkgbuilds
 
 pkgname=httpbin
-pkgver=0.2.0
+pkgver=0.4.0
 pkgrel=1
 pkgdesc="HTTP request and response service."
 arch=(any)
@@ -13,20 +13,29 @@ makedepends=(python-pip python-setuptools python-virtualenv)
 options=(!strip)
 #install="${pkgname}.install"
 source=(
-    "https://pypi.python.org/packages/3.4/h/${pkgname}/${pkgname}-${pkgver}-py2.py3-none-any.whl"
+    "https://pypi.python.org/packages/2.7/h/${pkgname}/${pkgname}-${pkgver}-py2.py3-none-any.whl"
     httpbin.service
     httpbin.confd
+    httpbin-uwsgi.service
+    httpbin-tmpfiles.conf
+    httpbin.install
+    httpbin-nginx.conf.sample
 )
 md5sums=(
-    66a4290ddf8f0111253b98d851c5460f # httpbin tarball
-    921f3b939d3370d405539b9bafc075af # httpbin service
+    2274b9c9bbd760e7145c5b75a3328896 # httpbin tarball
+    3e63e0f57482c1b10b0b2381a3f80c10 # httpbin service
     418aea521325ca495317590192d505a0 # httpbin conf.d environment
+    5ba104c5287457c634276b8a601653fa # httpbin uWSGI service sample
+    ffcaccf71d8f679bdf4a2d6b89749c93 # httpbin tmpfiles.d entry
+    68bc7765fa2b24cdda88712461422560 # httpbin.install
+    9409bcd8fc6b299264253347546fbf45 # httpbin nginx example
 )
+install="${pkgname}.install"
 
 package () {
 
     mkdir -p "${pkgdir}/opt/httpbin"
-    virtualenv --python=python3.4 "${pkgdir}/opt/httpbin"
+    virtualenv --python=python3.5 "${pkgdir}/opt/httpbin"
 
     source "${pkgdir}/opt/httpbin/bin/activate"
 
@@ -37,9 +46,17 @@ package () {
     # source /opt/httpbin/bin/activate && /opt/httpbin/python -m httpbin.core
     "${pkgdir}/opt/httpbin/bin/pip" install gunicorn
 
+    # Install uWSGI into the virtualenv. I'll be migrating the PKGBUILD to using
+    # uWSGI at some point in the future as it provides a better feature set (and
+    # stability) over gunicorn.
+    "${pkgdir}/opt/httpbin/bin/pip" install uwsgi
+
     virtualenv --relocatable "${pkgdir}/opt/httpbin"
     sed -i "s#${pkgdir}##" "${pkgdir}/opt/httpbin/bin/activate"
 
     install -Dm0644 "${srcdir}/httpbin.service" "${pkgdir}/usr/lib/systemd/system/httpbin.service"
-    install -Dm0644 "${srcdir}/httpbin.confd" "${pkgdir}/etc/conf.d/httpbin"
+    install -Dm0644 "${srcdir}/httpbin.conf.d" "${pkgdir}/etc/conf.d/httpbin"
+    install -Dm0644 "${srcdir}/httpbin-tmpfiles.conf" "${pkgdir}/etc/tmpfiles.d/httpbin.conf"
+    install -Dm0644 "${srcdir}/httpbin-uwsgi.service" "${pkgdir}/usr/share/httpbin/httpbin-uwsgi.service.sample"
+    install -Dm0644 "${srcdir}/httpbin-nginx.conf.sample" "${pkgdir}/usr/share/httpbin/httpbin-nginx.conf.sample"
 }
