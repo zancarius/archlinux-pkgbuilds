@@ -15,7 +15,7 @@ options=(!strip)
 source=(
     "https://pypi.python.org/packages/2.7/h/${pkgname}/${pkgname}-${pkgver}-py2.py3-none-any.whl"
     httpbin.service
-    httpbin.confd
+    httpbin.conf.d
     httpbin-uwsgi.service
     httpbin-tmpfiles.conf
     httpbin.install
