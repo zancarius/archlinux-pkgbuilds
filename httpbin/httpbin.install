@@ -1,0 +1,37 @@
+post_install(){
+cat << EOF
+
+  As of version 0.4.0, uWSGI support has been optionally included in the
+  package as an additional sample unit file. See:
+
+  /usr/share/httpbin/httpbin-uwsgi.service.sample
+
+  During this time, please consider migrating to uWSGI. To test:
+
+  sudo cp /usr/share/httpbin/httpbin-uwsgi.service.sample \\
+      /etc/systemd/system/httpbin-uwsgi.service &&
+      sudo systemctl daemon-reload &&
+      sudo systemd-tmpfiles --create &&
+      sudo systemctl start httpbin-uwsgi
+
+EOF
+}
+
+post_upgrade(){
+cat << EOF
+
+  As of version 0.4.0, uWSGI support has been optionally included in the
+  package as an additional sample unit file. See:
+
+  /usr/share/httpbin/httpbin-uwsgi.service.sample
+
+  During this time, please consider migrating to uWSGI. To test:
+
+  sudo cp /usr/share/httpbin/httpbin-uwsgi.service.sample \\
+      /etc/systemd/system/httpbin-uwsgi.service &&
+      sudo systemctl daemon-reload &&
+      sudo systemd-tmpfiles --create &&
+      sudo systemctl start httpbin-uwsgi
+
+EOF
+}

@@ -1,0 +1,16 @@
+[Unit]
+Description=httpbin request/response testing framework
+After=network.target
+
+[Service]
+User=nobody
+Restart=always
+PIDFile=/run/httpbin/httpbin.pid
+Environment=PATH=/opt/httpbin/bin
+EnvironmentFile=/etc/conf.d/httpbin
+ExecStart=/opt/httpbin/bin/uwsgi --http-socket="${HOST}:${PORT}" --module httpbin:app --master --pidfile=/run/httpbin/httpbin.pid --logto /var/log/httpbin/httpbin.log
+ExecStop=/opt/httpbin/bin/uwsgi --stop /run/httpbin/httpbin.pid
+ExecReload=/opt/httpbin/bin/uwsgi --reload /run/httpbin/httpbin.pid
+
+[Install]
+WantedBy=multi-user.target

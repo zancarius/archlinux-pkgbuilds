@@ -1,0 +1,19 @@
+# For more integration information with nginx, see:
+# https://uwsgi-docs.readthedocs.org/en/latest/Nginx.html
+
+server {
+    listen 80;
+    server_name example.com;
+
+    location / {
+        uwsgi_pass 127.0.0.1:8000;
+        # To enable UNIX sockets, change the uWSGI configuration accordingly
+        # and uncomment the following:
+        #uwsgi_pass unix:///run/httpbin/httpbin.sock
+        uwsgi_param Host $host;
+        uwsgi_param X-Real-IP $remote_addr;
+        uwsgi_param X-Forwarded-For $proxy_add_x_forwarded_for;
+        uwsgi_param X-Forwarded-Proto $http_x_forwarded_proto;
+        include uwsgi_params;
+    }
+}
