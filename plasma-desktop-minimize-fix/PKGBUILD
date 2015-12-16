@@ -1,0 +1,50 @@
+# $Id: PKGBUILD 256232 2015-12-15 16:42:33Z arojas $
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+# Contributor: Antonio Rojas
+
+pkgname=plasma-desktop-minimize-fix
+_pkgbase=plasma-desktop
+pkgver=5.5.1
+pkgrel=1
+pkgdesc='KDE Plasma Desktop'
+arch=('i686' 'x86_64')
+url='https://www.kde.org/workspaces/plasmadesktop/'
+license=('LGPL')
+source=("http://download.kde.org/stable/plasma/${pkgver}/${_pkgbase}-$pkgver.tar.xz" minimized-task-effect.patch)
+depends=('powerdevil' 'polkit-kde-agent' 'libcanberra' 'kwin' 'libxkbfile' 'kmenuedit'
+         'systemsettings' 'ksysguard' 'kpeople' 'baloo' 'qt5-graphicaleffects')
+makedepends=('extra-cmake-modules' 'kdoctools' 'boost' 'xf86-input-evdev' 'xf86-input-synaptics' 'xorg-server-devel')
+optdepends=('plasma-nm: Network manager applet')
+conflicts=('kdebase-workspace' 'kcm-touchpad-frameworks' 'plasma-desktop')
+replaces=('kcm-touchpad-frameworks')
+install="${pkgname}.install"
+groups=('plasma')
+md5sums=(
+    '022cceb5cd2d2dabc1bcf07522aebdbe'
+    '54c81db05feaf7365678ed7a985948ca'
+)
+
+prepare() {
+  mkdir -p build
+  cd "${_pkgbase}-${pkgver}"  
+  patch -p1 -i ../minimized-task-effect.patch
+  
+}
+
+build() {
+  cd build
+  cmake ../${_pkgbase}-${pkgver} \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DLIB_INSTALL_DIR=lib \
+    -DLIBEXEC_INSTALL_DIR=lib \
+    -DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
+    -DBUILD_TESTING=OFF
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="${pkgdir}" install
+}

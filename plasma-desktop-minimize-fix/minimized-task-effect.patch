@@ -1,0 +1,19 @@
++++ b/applets/taskmanager/package/contents/ui/Task.qml	2015-12-16 11:26:27.089538570 -0700
+@@ -250,7 +250,7 @@
+             visible: false
+ 
+             active: task.containsMouse
+-            enabled: true
++            enabled: !(model.Minimized && !plasmoid.configuration.showOnlyMinimized)
+ 
+             source: model.DecorationRole
+ 
+@@ -305,7 +305,7 @@
+ 
+         visible: (inPopup || !iconsOnly && !model.IsLauncher && (parent.width - LayoutManager.horizontalMargins()) >= (theme.mSize(theme.defaultFont).width * 7))
+ 
+-        enabled: true
++        enabled: !model.Minimized
+ 
+         text: (!inPopup && iconsOnly) ? "" : model.DisplayRole
+         color: theme.textColor
