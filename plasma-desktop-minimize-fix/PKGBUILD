@@ -10,7 +10,7 @@
 
 pkgname=plasma-desktop-minimize-fix
 _pkgbase=plasma-desktop
-pkgver=5.5.2
+pkgver=5.5.4
 pkgrel=1
 pkgdesc='KDE Plasma Desktop'
 arch=('i686' 'x86_64')
@@ -30,8 +30,8 @@ replaces=('kcm-touchpad-frameworks')
 install="${pkgname}.install"
 groups=('plasma')
 md5sums=(
-    'be58ab47cb66b25b0f00561c110d9ce6'
-    '54c81db05feaf7365678ed7a985948ca'
+    '2ec4ddd309582c91c39f1921415cc059'
+    '188407f87cb07f02e36ea520568e91ca'
     '6227e9332a715c2cf4dcf92e0cc02eda'
 )
 
@@ -39,7 +39,6 @@ prepare() {
   mkdir -p build
   cd "${_pkgbase}-${pkgver}"  
   patch -p1 -i ../minimized-task-effect.patch
-  patch -p1 -i ../tooltip-thumbnails.patch
 }
 
 build() {
