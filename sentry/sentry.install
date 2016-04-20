@@ -11,11 +11,12 @@ post_install(){
     /usr/bin/chown sentry:sentry /opt/sentry/celery
 
     # Generate a new configuration.
-    if [ ! -e "/etc/sentry/sentry.conf.py" ] ; then
-        "/opt/sentry/bin/sentry" init "/etc/sentry/sentry.conf.py"
+    if [ ! -e "/etc/sentry/sentry.conf.py" ] || [ ! -e "/etc/sentry/config.yml" ] ; then
+        "/opt/sentry/bin/sentry" init "/etc/sentry"
     fi
 
     /usr/bin/chmod 0600 /etc/sentry/sentry.conf.py
+    /usr/bin/chmod 0600 /etc/sentry/config.yml
 
 cat << EOF
 
@@ -42,12 +43,12 @@ step.
 3) Run migrations:
 
     sudo -u sentry PATH=/opt/sentry/bin:\$PATH \\
-        /opt/sentry/bin/sentry --config=/etc/sentry/sentry.conf.py upgrade
+        /opt/sentry/bin/sentry --config=/etc/sentry upgrade
 
 4) Create the initial superuser:
 
     sudo -u sentry PATH=/opt/sentry/bin:\$PATH \\
-        /opt/sentry/bin/sentry --config=/etc/sentry/sentry.conf.py createuser
+        /opt/sentry/bin/sentry --config=/etc/sentry createuser
 
 5) Start Sentry:
 
@@ -56,7 +57,7 @@ step.
 If you wish to run Sentry manually, e.g. to test your configuration:
 
     sudo -u sentry PATH=/opt/sentry/bin:\$PATH \\
-        --config=/etc/sentry/sentry.conf.py start
+        /opt/sentry/bin/sentry --config=/etc/sentry start
 
 EXTRAS
 
@@ -94,6 +95,7 @@ post_upgrade(){
     /usr/bin/chown sentry:sentry /opt/sentry/celery
 
     /usr/bin/chmod 0600 /etc/sentry/sentry.conf.py
+    /usr/bin/chmod 0600 /etc/sentry/config.yml
 
 cat << EOF
 
@@ -135,7 +137,7 @@ this step if you do):
 !!! ALWAYS BACK-UP YOUR DATABASE PRIOR TO UPGRADING SENTRY !!!
 
     sudo -u sentry PATH=/opt/sentry/bin:\$PATH \\
-        /opt/sentry/bin/sentry --config=/etc/sentry/sentry.conf.py upgrade
+        /opt/sentry/bin/sentry --config=/etc/sentry upgrade
 
 5) Start Sentry:
 
@@ -144,7 +146,7 @@ this step if you do):
 If you wish to run Sentry manually, e.g. to test your configuration:
 
     sudo -u sentry PATH=/opt/sentry/bin:\$PATH \\
-        --config=/etc/sentry/sentry.conf.py start
+        /opt/sentry/bin/sentry --config=/etc/sentry start
 
 EXTRAS
 
