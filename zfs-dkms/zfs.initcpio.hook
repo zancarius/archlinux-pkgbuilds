@@ -34,7 +34,7 @@ zfs_mount_handler () {
     local pool="${ZFS_DATASET%%/*}"
     local rwopt_exp=${rwopt:-ro}
 
-    if ! "zpool" list -H $pool 2>&1 > /dev/null ; then
+    if ! "zpool" list -H $pool > /dev/null 2>&1 ; then
         if [ "$rwopt_exp" != "rw" ]; then
             msg "ZFS: Importing pool $pool readonly."
             ZPOOL_IMPORT_FLAGS="$ZPOOL_IMPORT_FLAGS -o readonly=on"
@@ -110,9 +110,13 @@ run_hook() {
     done
 }
 
-
-run_latehook () {
-    /usr/bin/zpool import -N -a $ZPOOL_FORCE
-}
+# Importing all mountpoints from the pool will not work at this point since
+# initrd mounts everything under /new_root, chroots to that dir, and then
+# continues booting. Attempting an import here fails (the pool is already
+# mounted), and even if it did work, the mountpoints were already mounted
+# above in zfs_mount_handler.
+#run_latehook () {
+#    /usr/bin/zpool import -N -a $ZPOOL_FORCE
+#}
 
 # vim:set ts=4 sw=4 ft=sh et:
