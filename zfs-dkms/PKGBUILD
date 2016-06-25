@@ -1,3 +1,9 @@
+# WARNING: This is NOT the official zfs-dkms build. Do NOT use this unless you
+# know what you're doing or have a specific reason to do so. Read the included
+# README first for information and credits.
+#
+# Most patches include work from rwanyoike: https://github.com/rwanyoike and
+# are sourced from this issue: https://github.com/archzfs/archzfs/issues/53
 #
 # Maintainer: Iacopo Isimbaldi <isiachi@rhye.it>
 #
