@@ -23,7 +23,7 @@ source=("git+https://github.com/zfsonlinux/zfs.git#tag=zfs-${pkgver}"
 sha256sums=('SKIP'
             'b60214f70ffffb62ffe489cbfabd2e069d14ed2a391fac0e36f914238394b540'
             '8e20c3c84c2a8d5f251ba78ffd7ea7f5f5abcf4a22916dede3d55f067a9abae7'
-            '3cb8ab8447f971326e2b326bbaf26e5bfbfbffc8a3233cf851d53e1dadfc5677')
+            '7aca6665b89b67a06e00e47b5227897fb95a5bee08eb4a0292c3ccf7a0d99218')
 
 build() {
     cd "${srcdir}/zfs"
