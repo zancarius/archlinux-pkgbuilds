@@ -16,7 +16,7 @@ pkgdesc="PHP extension for IMagick"
 arch=('i686' 'x86_64')
 url="http://pecl.php.net/package/${_extname}"
 license=('PHP')
-depends=('php56>=5.1.3' 'imagemagick>=6.2.4')
+depends=('php>=5.1.3' 'imagemagick>=6.2.4')
 backup=("etc/php/conf.d/${_extname}.ini")
 install="php-${_extname}.install"
 source=("http://pecl.php.net/get/${_extname}-${pkgver}.tgz")
