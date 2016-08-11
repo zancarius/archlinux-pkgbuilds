@@ -91,7 +91,8 @@ and increasingly more options are being moved to Sentry's YAML-based configs:
     sudo vimdiff /etc/sentry/sentry.conf.py /etc/sentry/temp/sentry.conf.py
     sudo vimdiff /etc/sentry/config.yml /etc/sentry/temp/config.yml
 
-    # Move Sentry's YAML configuration to the config root:
+    # ...or move Sentry's YAML configuration to the config root:
+    sudo -u sentry mv /etc/sentry/temp/sentry.conf.py /etc/sentry/
     sudo -u sentry mv /etc/sentry/temp/config.yml /etc/sentry/
 
     # Delete the temporary config directory:
