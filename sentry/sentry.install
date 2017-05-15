@@ -2,7 +2,7 @@ post_install(){
 
     /usr/bin/mkdir -p /opt/sentry/celery
     # Restart systemd-sysusers so it picks up our user account.
-    /usr/bin/systemctl restart systemd-sysusers
+    /usr/bin/systemd-sysusers /usr/lib/sysusers.d/sentry.conf
 
     # Generate a new configuration.
     if [ ! -e "/etc/sentry/sentry.conf.py" ] || [ ! -e "/etc/sentry/config.yml" ] ; then
