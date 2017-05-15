@@ -177,7 +177,7 @@ EOF
 
 }
 
-post_uninstall(){
+post_remove(){
 
 cat << EOF
 Sentry has been removed. If this is a permanent decision, you'll need to
