@@ -1,0 +1,52 @@
+# Maintainer: Benjamin A. Shelton <zancarius@gmail.com>
+# Source: https://github.com/zancarius/archlinux-pkgbuilds
+#
+# Based on the official Python packages for Arch.
+
+pkgname=('python-pipenv' 'python2-pipenv')
+pkgver=8.2.7
+pkgrel=1
+pkgdesc="Python packaging tool for managing virtualenvs and dependencies."
+arch=(any)
+url='https://docs.pipenv.org/'
+license=('MIT')
+source=("https://pypi.org/packages/source/p/pipenv/pipenv-${pkgver}.tar.gz")
+sha256sums=('f5fb18d22c3252c6778a1e741476bae841f5cf966b88527d55fd3f8c8dee9323')
+
+package_python-pipenv() {
+    depends=(
+        'flake8'
+        'python'
+        'python-pip'
+        'python-pew'
+        'python-setuptools'
+        'python-urllib3'
+        'python-virtualenv'
+    )
+
+    cd "${srcdir}/pipenv-${pkgver}"
+    LANG='en_US.UTF-8' python3 setup.py build
+    LANG='en_US.UTF-8' python3 setup.py install --prefix=/usr --root="${pkgdir}"
+
+    ln "${pkgdir}/usr/bin/pipenv" "${pkgdir}/usr/bin/pipenv3"
+}
+
+package_python2-pipenv() {
+    depends=(
+        'python2'
+        'python2-flake8'
+        'python2-pew'
+        'python2-pip'
+        'python2-setuptools'
+        'python2-shutilwhich'
+        'python2-urllib3'
+        'python2-virtualenv'
+    )
+
+    cd "${srcdir}/pipenv-${pkgver}"
+
+    python2 setup.py build
+    python2 setup.py install --prefix=/usr --root="${pkgdir}"
+
+    mv "${pkgdir}/usr/bin/pipenv" "${pkgdir}/usr/bin/pipenv2"
+}

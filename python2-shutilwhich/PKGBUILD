@@ -1,0 +1,29 @@
+# Maintainer: Benjamin A. Shelton <zancarius@gmail.com>
+# Source: https://github.com/zancarius/archlinux-pkgbuilds
+#
+# Based on the official Python packages for Arch.
+#
+# This package only provides shutilwhich for Python 2 because Arch does not
+# officially provide older Python 3 packages (and you should upgrade).
+
+pkgname=('python2-shutilwhich')
+pkgver=1.1.0
+pkgrel=1
+pkgdesc='shutil.which for Python distributions earlier than Python 3.3.'
+arch=(any)
+url='https://github.com/mbr/shutilwhich'
+depends=('python2' 'python-setuptools')
+makedepends=('python-setuptools')
+license=('MIT')
+source=("https://pypi.org/packages/source/s/shutilwhich/shutilwhich-${pkgver}.tar.gz")
+sha256sums=('db1f39c6461e42f630fa617bb8c79090f7711c9ca493e615e43d0610ecb64dc6')
+
+package() {
+    cd "${srcdir}/shutilwhich-${pkgver}"
+
+    python2 setup.py build
+    python2 setup.py install --prefix=/usr --root="${pkgdir}"
+
+    # Distribution has wrong umask set?
+    chmod -R a+r "${pkgdir}/usr/lib/python2.7/site-packages/shutilwhich-${pkgver}-py2.7.egg-info"
+}

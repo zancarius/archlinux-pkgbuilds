@@ -1,0 +1,46 @@
+# Maintainer: Benjamin A. Shelton <zancarius@gmail.com>
+# Source: https://github.com/zancarius/archlinux-pkgbuilds
+#
+# Based on the official Python packages for Arch.
+
+pkgname=('python-pew' 'python2-pew')
+pkgver=1.1.0
+pkgrel=1
+pkgdesc='Tool for managing multiple virtualenvs written in pure Python.'
+arch=(any)
+url='https://github.com/berdario/pew'
+license=('MIT')
+#install=''
+source=("https://pypi.org/packages/source/p/pew/pew-${pkgver}.tar.gz")
+sha256sums=('d0f9d127cf321c959bb857e59080f7eaa59c8bbeb2d53aa07d3350aae50e1f2d')
+
+package_python-pew() {
+    makedepends=('python-setuptools')
+    depends=(
+        'python'
+        'python-virtualenv'
+        'python-virtualenv-clone'
+    )
+
+    cd "${srcdir}/pew-${pkgver}"
+    LANG='en_US.UTF-8' python3 setup.py build
+    LANG='en_US.UTF-8' python3 setup.py install --prefix=/usr --root="${pkgdir}"
+
+    ln -s "${pkgdir}/usr/bin/pew" "${pkgdir}/usr/bin/pew3"
+}
+
+package_python2-pew() {
+    makedepends=('python2-setuptools')
+    depends=(
+        'python2'
+        'python2-virtualenv'
+        'python2-virtualenv-clone'
+    )
+
+    cd "${srcdir}/pew-${pkgver}"
+
+    python2 setup.py build
+    python2 setup.py install --prefix=/usr --root="${pkgdir}"
+
+    mv "${pkgdir}/usr/bin/pew" "${pkgdir}/usr/bin/pew2"
+}
