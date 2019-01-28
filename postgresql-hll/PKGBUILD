@@ -2,17 +2,17 @@
 # Source: https://github.com/zancarius/archlinux-pkgbuilds
 
 pkgname=postgresql-hll
-pkgver=20170627
+pkgver=20190125
 pkgrel=1
 pkgdesc="HyperLogLog for PostgreSQL."
 arch=(x86_64)
-url="https://github.com/aggregateknowledge/postgresql-hll"
+url="https://github.com/citusdata/postgresql-hll"
 license=(Apache)
 source=()
 md5sums=()
 makedepends=(postgresql postgresql-libs)
 
-_gitroot="https://github.com/aggregateknowledge/postgresql-hll"
+_gitroot="https://github.com/citusdata/postgresql-hll"
 _gitname="postgresql-hll"
 
 build () {
