@@ -1,0 +1,3 @@
+mkarchroot -C pacman.conf -M /etc/makepkg.conf .chroot/root base-devel boost bzip2 cmake inetutils jemalloc libaio libsystemd libxml2 lz4 lzo openssl xz zlib
+makechrootpkg -c -r .chroot
+
