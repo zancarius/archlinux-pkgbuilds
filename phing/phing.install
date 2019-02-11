@@ -3,10 +3,12 @@ post_install(){
 cat << EOF
 
 =========
-Phing will be dropping support for manual installation as of version 3.0.
+Phing will be dropping support for manual installation as of version 3.0. This
+package will be deleted when 3.0 (stable) is released.
 
 It is recommended that you migrate your dependencies to
-Composer (http://getcomposer.org).
+Composer (http://getcomposer.org) and install Phing from there. See
+https://www.phing.info for migration instructions.
 =========
 
 EOF
@@ -18,10 +20,12 @@ post_upgrade(){
 cat << EOF
 
 =========
-Phing will be dropping support for manual installation as of version 3.0.
+Phing will be dropping support for manual installation as of version 3.0. This
+package will be deleted when 3.0 (stable) is released.
 
 It is recommended that you migrate your dependencies to
-Composer (http://getcomposer.org).
+Composer (http://getcomposer.org) and install Phing from there. See
+https://www.phing.info for migration instructions.
 =========
 
 EOF
