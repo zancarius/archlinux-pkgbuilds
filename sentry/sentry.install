@@ -53,8 +53,8 @@ We've removed LLVM from the "depends" array as part of our dependency cleanup
 to make life a little bit easier for those who have been requesting reduced
 dependency builds for quite some time. Now, you should no longer need to
 modify the PKGBUILD prior to build or installation. Please note that projects
-making use of dsym (symsynd) should still require the presence of LLVM. It has
-been moved to "optdepends" for this reason.
+making use of dsym (symsynd) still require the presence of LLVM. It has been
+moved to "optdepends" for this reason.
 
 IF THE INSTALL FAILS DURING DATABASE MIGRATIONS
 
@@ -179,8 +179,8 @@ We've removed LLVM from the "depends" array as part of our dependency cleanup
 to make life a little easier for those who have been requesting reduced
 dependency builds for quite some time. Now, you should no longer need to
 modify the PKGBUILD prior to build or installation. Please note that projects
-making use of dsym (symsynd) should still require the presence of LLVM. It has
-been moved to "optdepends" for this reason.
+making use of dsym (symsynd) still require the presence of LLVM. It has been
+moved to "optdepends" for this reason.
 
 I'VE UPGRADED AND SENTRY WON'T START!
 
