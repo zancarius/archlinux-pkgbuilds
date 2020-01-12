@@ -14,7 +14,7 @@ makedepends=('extra-cmake-modules' 'git' 'kdoctools' 'python')
 provides=('konsole')
 conflicts=('konsole' 'kdebase-konsole')
 source=(
-    "konsole-git::git+https://anongit.kde.org/konsole.git#tag=v19.12.1"
+    "konsole::git+https://anongit.kde.org/konsole.git#tag=v19.12.1"
     'high-dpi.patch'
     'konsole.install')
 
