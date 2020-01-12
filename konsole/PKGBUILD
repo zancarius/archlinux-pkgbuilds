@@ -1,0 +1,54 @@
+# Maintainer: Tajidin Abd <tajidinabd at archlinux dot us>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+# High DPI disable patch: Benjamin A. Shelton <bshelton@destrealm.org>
+
+pkgname=konsole
+pkgver=19.12.1
+pkgrel=1
+pkgdesc="KDE's terminal emulator"
+arch=('i686' 'x86_64')
+url='https://projects.kde.org/projects/kde/applications/konsole'
+license=('GPL' 'LGPL' 'FDL')
+depends=('kbookmarks' 'kcompletion' 'kconfig' 'kconfigwidgets' 'kcoreaddons' 'kcrash' 'kguiaddons' 'kdbusaddons' 'ki18n' 'kiconthemes' 'kinit' 'kio' 'knewstuff' 'knotifications' 'knotifyconfig' 'kparts' 'kpty' 'kservice' 'ktextwidgets' 'kwidgetsaddons' 'kwindowsystem' 'kxmlgui' 'kglobalaccel')
+makedepends=('extra-cmake-modules' 'git' 'kdoctools' 'python')
+provides=('konsole')
+conflicts=('konsole' 'kdebase-konsole')
+source=(
+    "konsole-git::git+https://anongit.kde.org/konsole.git#tag=v19.12.1"
+    'high-dpi.patch'
+    'konsole.install')
+
+sha256sums=(
+    'SKIP'
+    '1507674379773277c3a28e8b56fc7b6e9bfe6a55c15479b102377f2afa974657'
+    '527341532a7e5c8a1859b97a5f848b7764acbd047a5f793754f717b2d76778ee'
+)
+
+prepare() {
+  mkdir -p build
+  cd "${srcdir}/${pkgname}"
+  patch -Np1 -i ../high-dpi.patch
+}
+
+build() {
+  cd build
+  BUILD_TYPE=Release
+  if [[ " ${OPTIONS[@]} " =~ " debug " ]]; then
+    BUILD_TYPE=Debug
+  elif [[ " ${OPTIONS[@]} " =~ " !strip " ]]; then
+    BUILD_TYPE=RelDebug
+  fi
+  echo "${BUILD_TYPE}"
+
+  cmake ../${pkgname} \
+    -DCMAKE_BUILD_TYPE=${BUILD_TYPE} \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DKDE_INSTALL_LIBDIR=lib \
+    -DBUILD_TESTING=OFF
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="${pkgdir}" install
+}
