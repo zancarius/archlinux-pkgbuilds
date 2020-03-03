@@ -1,0 +1,35 @@
+# Modifications: Benjamin Shelton <zancarius@gmail.com>
+# Source maintainer: ZenQy <zenqy.qin@gmail.com>
+
+pkgname=athens
+pkgver=0.7.2
+pkgrel=1
+pkgdesc="A proxy server for the Go Modules download API"
+arch=('x86_64')
+url="https://github.com/gomods/athens"
+license=('MIT')
+depends=('glibc')
+makedepends=('git' 'go')
+provides=('athens')
+backup=('etc/athens/config.toml')
+source=("${url}/archive/v${pkgver}/${pkgname}-${pkgver}.tar.gz?signed" 'athens.service')
+sha256sums=(
+    '074cbeb0a45d0c14496380ef6700f294431bf9aa25987d4021b139a0957d09e9'
+    '931b64fa0a5576b74bd9289e9e0e9963c75489a7a4dea80072d863e05689cc9f'
+)
+validpgpkeys=(
+    '5DE3E0509C47EA3CF04A42D34AEE18F83AFDEB23' # GitHub
+)
+
+build() {
+  # rm "${srcdir}/${pkgname}-${pkgver}/go.sum"
+  cd "${srcdir}/${pkgname}-${pkgver}/cmd/proxy"
+  go build -ldflags "-extldflags ${LDFLAGS}" -buildmode=pie
+}
+
+package() {
+  install -Dm755 "${srcdir}/${pkgname}-${pkgver}/cmd/proxy/proxy" "${pkgdir}/usr/bin/${pkgname}"
+  install -Dm644 "${srcdir}/${pkgname}-${pkgver}/config.dev.toml" "${pkgdir}/etc/${pkgname}/config.toml"
+  install -Dm644 "${srcdir}/${pkgname}-${pkgver}/LICENSE" "${pkgdir}/usr/share/licenses/athens/LICENSE"
+  install -Dm644 "${srcdir}/athens.service" "$pkgdir/usr/lib/systemd/system/athens.service"
+}
